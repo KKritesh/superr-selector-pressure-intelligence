@@ -3,8 +3,146 @@ import { X } from 'lucide-react';
 import { useData } from '../../data/DataProvider';
 import { formatDate } from '../../domain/format';
 import { TOOLTIPS } from '../../config/constants';
-export function MethodologyDrawer({onClose}:{onClose:()=>void}){
-  const {meta}=useData(),ref=useRef<HTMLDivElement>(null);
-  useEffect(()=>{const previous=document.activeElement as HTMLElement;const overflow=document.body.style.overflow;document.body.style.overflow='hidden';ref.current?.querySelector<HTMLElement>('button')?.focus();const key=(e:KeyboardEvent)=>{if(e.key==='Escape')onClose();if(e.key==='Tab'){const focusable=ref.current?.querySelectorAll<HTMLElement>('button,a[href],input,[tabindex="0"]');if(!focusable?.length)return;const first=focusable[0],last=focusable[focusable.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}};document.addEventListener('keydown',key);return()=>{document.body.style.overflow=overflow;document.removeEventListener('keydown',key);previous?.focus();};},[onClose]);
-  return <div className="drawer-backdrop" onMouseDown={e=>{if(e.target===e.currentTarget)onClose();}}><section className="methodology-drawer" role="dialog" aria-modal="true" aria-labelledby="methodology-title" ref={ref}><header><div><span className="eyebrow">THE METHODOLOGY</span><h2 id="methodology-title">How scores work</h2></div><button className="icon-button" onClick={onClose} aria-label="Close methodology"><X size={22}/></button></header><div className="drawer-body"><section><h3>Performance when it matters</h3><p>{TOOLTIPS.master} The match scores combine how a player responds to the live situation with their underlying class and form.</p></section><section><h3>Two ways to view the same evidence</h3><h4>Option B — Bayesian</h4><p>{TOOLTIPS.B.replace('Option B — Bayesian: ','')}</p><h4>Option C — Consistency Adjusted</h4><p>{TOOLTIPS.C.replace('Option C — Consistency Adjusted: ','')}</p></section><section><h3>Realtime & Individual</h3><p>Realtime Performance describes handling of the live match situation. Individual Player Score describes Class/Form. Both are supporting metrics weighted towards recent matches; they do not reproduce the Master Pressure Score on their own.</p></section><section><h3>Read the evidence alongside the score</h3><p>Matches Analysed counts qualifying T20 and T20I role performances. “Limited sample” means fewer than 5 matches. Effective sample size tells you how much evidence remains after recent matches receive more weight. These labels never alter the scores.</p></section><section><h3>Separate roles, comparable context</h3><p>Batting and bowling have separate scores, ranks and percentiles. There is no combined all-rounder score. All score bars and charts use a fixed 0–100 scale.</p></section><section><h3>Parameters</h3><dl className="detail-list"><div><dt>Recency half-life</dt><dd>{meta.params.halfLifeDays} days</dd></div><div><dt>Bayesian balance (k)</dt><dd>{meta.params.shrinkageK}</dd></div><div><dt>Consistency adjustment (λ)</dt><dd>{meta.params.consistencyLambda}</dd></div></dl></section><section><h3>Data & dates</h3><p>Match data through {formatDate(meta.dataThrough)}. Recency weights are fixed as of {formatDate(meta.asOfDate)}. Scores are read directly from the supplied workbooks and are never recalculated here.</p><ul className="source-files">{meta.sources.map(s=><li key={s.file}>{s.file}</li>)}</ul></section><details><summary>Scoring framework reference</summary><p>Realtime R = E × (0.7 + 0.3P/100), where E = (0.5D + 0.2A) / 0.7; P is entry pressure, D is performance during play and A is relief after. Individual I = 0.30 Class + 0.70 Form. Match-level Final Pressure Score = 0.65R + 0.35I.</p><p>Option B balances the recency-weighted average with the role benchmark: (Σw × average + k × benchmark) / (Σw + k). Option C subtracts λ × weighted standard deviation / √(effective sample size). These describe the supplied framework; this app displays its precomputed outputs.</p></details></div></section></div>;
+export function MethodologyDrawer({ onClose }: { onClose: () => void }) {
+  const { meta } = useData(),
+    ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const previous = document.activeElement as HTMLElement;
+    const overflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    ref.current?.querySelector<HTMLElement>('button')?.focus();
+    const key = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+      if (e.key === 'Tab') {
+        const focusable = ref.current?.querySelectorAll<HTMLElement>(
+          'button,a[href],input,summary,[tabindex="0"]',
+        );
+        if (!focusable?.length) return;
+        const first = focusable[0],
+          last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+    document.addEventListener('keydown', key);
+    return () => {
+      document.body.style.overflow = overflow;
+      document.removeEventListener('keydown', key);
+      previous?.focus();
+    };
+  }, [onClose]);
+  return (
+    <div
+      className="drawer-backdrop"
+      onMouseDown={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
+      <section
+        className="methodology-drawer"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="methodology-title"
+        ref={ref}
+      >
+        <header>
+          <div>
+            <span className="eyebrow">THE METHODOLOGY</span>
+            <h2 id="methodology-title">How scores work</h2>
+          </div>
+          <button className="icon-button" onClick={onClose} aria-label="Close methodology">
+            <X size={22} />
+          </button>
+        </header>
+        <div className="drawer-body">
+          <section>
+            <h3>Performance when it matters</h3>
+            <p>
+              {TOOLTIPS.master} The match scores combine how a player responds to the live situation
+              with their underlying class and form.
+            </p>
+          </section>
+          <section>
+            <h3>Two ways to view the same evidence</h3>
+            <h4>Option B — Bayesian</h4>
+            <p>{TOOLTIPS.B.replace('Option B — Bayesian: ', '')}</p>
+            <h4>Option C — Consistency Adjusted</h4>
+            <p>{TOOLTIPS.C.replace('Option C — Consistency Adjusted: ', '')}</p>
+          </section>
+          <section>
+            <h3>Realtime & Individual</h3>
+            <p>
+              Realtime Performance describes handling of the live match situation. Individual Player
+              Score describes Class/Form. Both are supporting metrics weighted towards recent
+              matches; they do not reproduce the Master Pressure Score on their own.
+            </p>
+          </section>
+          <section>
+            <h3>Read the evidence alongside the score</h3>
+            <p>
+              Matches Analysed counts qualifying T20 and T20I role performances. “Limited sample”
+              means fewer than 5 matches. Effective sample size tells you how much evidence remains
+              after recent matches receive more weight. These labels never alter the scores.
+            </p>
+          </section>
+          <section>
+            <h3>Separate roles, comparable context</h3>
+            <p>
+              Batting and bowling have separate scores, ranks and percentiles. There is no combined
+              all-rounder score. All score bars and charts use a fixed 0–100 scale.
+            </p>
+          </section>
+          <section>
+            <h3>Parameters</h3>
+            <dl className="detail-list">
+              <div>
+                <dt>Recency half-life</dt>
+                <dd>{meta.params.halfLifeDays} days</dd>
+              </div>
+              <div>
+                <dt>Bayesian balance (k)</dt>
+                <dd>{meta.params.shrinkageK}</dd>
+              </div>
+              <div>
+                <dt>Consistency adjustment (λ)</dt>
+                <dd>{meta.params.consistencyLambda}</dd>
+              </div>
+            </dl>
+          </section>
+          <section>
+            <h3>Data & dates</h3>
+            <p>
+              Match data through {formatDate(meta.dataThrough)}. Recency weights are fixed as of{' '}
+              {formatDate(meta.asOfDate)}. Scores are read directly from the supplied workbooks and
+              are never recalculated here.
+            </p>
+            <ul className="source-files">
+              {meta.sources.map((s) => (
+                <li key={s.file}>{s.file}</li>
+              ))}
+            </ul>
+          </section>
+          <details>
+            <summary tabIndex={0}>Scoring framework reference</summary>
+            <p>
+              Realtime R = E × (0.7 + 0.3P/100), where E = (0.5D + 0.2A) / 0.7; P is entry pressure,
+              D is performance during play and A is relief after. Individual I = 0.30 Class + 0.70
+              Form. Match-level Final Pressure Score = 0.65R + 0.35I.
+            </p>
+            <p>
+              Option B balances the recency-weighted average with the role benchmark: (Σw × average
+              + k × benchmark) / (Σw + k). Option C subtracts λ × weighted standard deviation /
+              √(effective sample size). These describe the supplied framework; this app displays its
+              precomputed outputs.
+            </p>
+          </details>
+        </div>
+      </section>
+    </div>
+  );
 }
