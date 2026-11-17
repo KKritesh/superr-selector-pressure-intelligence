@@ -154,7 +154,7 @@ export function PlayerSearch({
               No players match “{query}”. Try a shorter name or a player ID.
               {incompatible && onRoleHint && (
                 <p>
-                  {incompatible.identity.name} has no{' '}
+                  {incompatible.identity.name} has no eligible{' '}
                   {roleFilter === 'batter' ? 'batting' : 'bowling'} score. They are rated as a{' '}
                   {bestRole(incompatible, method)} —{' '}
                   <button

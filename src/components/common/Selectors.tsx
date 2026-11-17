@@ -100,13 +100,17 @@ export function RoleSelector({
           value: 'batter',
           label: 'Batter',
           disabled: !available.includes('batter'),
-          title: !available.includes('batter') ? 'No batting score for this player' : undefined,
+          title: !available.includes('batter')
+            ? 'No eligible batting score for this player'
+            : undefined,
         },
         {
           value: 'bowler',
           label: 'Bowler',
           disabled: !available.includes('bowler'),
-          title: !available.includes('bowler') ? 'No bowling score for this player' : undefined,
+          title: !available.includes('bowler')
+            ? 'No eligible bowling score for this player'
+            : undefined,
         },
       ]}
     />

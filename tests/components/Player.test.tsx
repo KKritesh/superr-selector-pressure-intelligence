@@ -17,7 +17,7 @@ vi.mock('recharts', async () => {
     ResponsiveContainer: ({ children }: { children: React.ReactElement }) => <div>{children}</div>,
   };
 });
-function setup(hash: string) {
+function setup(hash: string, sourcePlayers = players) {
   window.location.hash = hash;
   vi.stubGlobal(
     'fetch',
@@ -30,7 +30,7 @@ function setup(hash: string) {
             ? batter
             : url.includes('history.bowler')
               ? bowler
-              : players,
+              : sourcePlayers,
     })),
   );
 }
@@ -64,7 +64,11 @@ describe('profile and search interactions', () => {
     expect(screen.getByRole('heading', { name: 'Abhishek Sharma' })).toBeInTheDocument();
   });
   it('supports arrow / Enter selection and duplicate-name IDs', async () => {
-    setup('/');
+    const collisionFixture = structuredClone(players);
+    for (const r of collisionFixture.records) {
+      if ([8638, 39444].includes(r.playerId)) r.matches = 10;
+    }
+    setup('/', collisionFixture);
     const onSelect = vi.fn();
     render(
       <HashRouter>

@@ -84,7 +84,7 @@ describe('accessible navigation and methodology', () => {
     await screen.findByRole('heading', { name: 'Who performs when it matters most?' });
     for (const state of ['rankings', 'search', 'drawer']) {
       if (state === 'search')
-        fireEvent.change(screen.getByRole('combobox'), { target: { value: 'Basil Hameed' } });
+        fireEvent.change(screen.getByRole('combobox'), { target: { value: 'Abhishek Sharma' } });
       if (state === 'drawer') {
         fireEvent.keyDown(screen.getByRole('combobox'), { key: 'Escape' });
         fireEvent.click(screen.getByRole('button', { name: 'How scores work' }));

@@ -53,7 +53,7 @@ export default function ComparePage() {
       removed = ids.filter((id) => !retained.includes(id));
     if (removed.length)
       setToast(
-        `Removed ${removed.length} players with no ${nextRole === 'batter' ? 'batting' : 'bowling'} score: ${removed.map((id) => displayName(identities.get(id)!)).join(', ')}`,
+        `Removed ${removed.length} players with no eligible ${nextRole === 'batter' ? 'batting' : 'bowling'} score: ${removed.map((id) => displayName(identities.get(id)!)).join(', ')}`,
       );
     else setToast('');
     const next = new URLSearchParams(params);

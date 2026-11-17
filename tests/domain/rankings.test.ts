@@ -85,11 +85,11 @@ describe('rankings for the remaining consideration pool', () => {
       }
     expect(JSON.stringify(source)).toBe(before);
   });
-  it('removes rank gaps: Jasprit Bumrah moves from source #4 to #2 among 605 bowlers', () => {
+  it('removes rank gaps: Jasprit Bumrah moves from source #4 to #2 among 247 eligible bowlers', () => {
     const result = reviseRankings(playersForConsideration(source));
     const bumrah = result.players.records.find((r) => r.playerId === 2933 && r.role === 'bowler')!;
-    expect(result.population.B.bowler).toBe(605);
-    expect(result.population.B.batter).toBe(827);
+    expect(result.population.B.bowler).toBe(247);
+    expect(result.population.B.batter).toBe(318);
     expect(bumrah.methods.B.rankDisplay).toBe('#2');
     expect(bumrah.sourceMethods!.B.rankDisplay).toBe('#4');
   });

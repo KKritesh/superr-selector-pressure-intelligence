@@ -10,8 +10,8 @@ export const NARROW_LEAD = 1;
 export const CLEAR_LEAD = 3;
 export const MAX_COMPARE = 5;
 export const EXCLUDED_NATIONALITIES = ['Pakistan'] as const;
-export const CONSIDERATION_NOTE =
-  'Nationality filter: Pakistan excluded. Ranks and percentiles use the remaining players.';
+export const MIN_ROLE_MATCHES = 10;
+export const CONSIDERATION_NOTE = `Pakistan excluded; each role requires at least ${MIN_ROLE_MATCHES} analysed matches. Ranks and percentiles use eligible role performances.`;
 export const METHOD_NAMES = {
   B: 'Option B — Bayesian',
   C: 'Option C — Consistency Adjusted',
@@ -25,7 +25,7 @@ export const TOOLTIPS = {
   C: 'Option C — Consistency Adjusted: starts from Option B and lowers the score of players whose results swing widely from match to match.',
   master:
     'Overall rating out of 100 for how well this player performs when the match is tough. Higher is better.',
-  rank: 'Position and percentile among players of this role after nationality exclusions. Pressure scores are unchanged.',
+  rank: `Position and percentile among eligible players in this role. At least ${MIN_ROLE_MATCHES} analysed matches are required.`,
   realtime:
     'Supporting metric: how well the player handled the live match situation. Weighted towards recent matches.',
   individual:

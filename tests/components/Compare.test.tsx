@@ -92,11 +92,15 @@ describe('comparison interactions with actual scores', () => {
     await waitFor(() => expect(window.location.hash).toContain('role=bowler'));
     const retained = ids.filter((id: number) =>
       players.records.some(
-        (r: { role: string; playerId: number }) => r.role === 'bowler' && r.playerId === id,
+        (r: { role: string; playerId: number; matches: number | null }) =>
+          r.role === 'bowler' && r.playerId === id && r.matches !== null && r.matches >= 10,
       ),
     );
     expect(screen.getByText(`Selected ${retained.length} of 5`)).toBeInTheDocument();
-    if (retained.length < 5) expect(screen.getByText(/Removed 2 players/)).toBeInTheDocument();
+    if (retained.length < 5)
+      expect(
+        screen.getByText(new RegExp(`Removed ${ids.length - retained.length} players`)),
+      ).toBeInTheDocument();
   });
   it('normalizes incompatible and duplicate IDs from a deep link', async () => {
     setup('/compare?role=bowler&ids=6281,6281,999999,not-an-id&m=B');

@@ -160,10 +160,10 @@ export default function PlayerPage() {
       {rawId && (!identity || !record) ? (
         <section className="card empty-state">
           <UserRound size={32} />
-          <h1>{identity ? 'No score for this role' : 'Player not found'}</h1>
+          <h1>{identity ? 'No eligible score for this role' : 'Player not found'}</h1>
           <p>
             {identity
-              ? `${identity.name} has no ${roleLabel(role).toLowerCase()} score. Select an available role above.`
+              ? `${identity.name} has no eligible ${roleLabel(role).toLowerCase()} score under the current filters. Select an available role above.`
               : 'Search for a player by name or player ID.'}
           </p>
           <Link className="button" to={`/player?m=${method}`}>

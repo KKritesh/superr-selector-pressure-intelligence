@@ -16,7 +16,8 @@ const consideredIds = new Set(
     .map((p: { playerId: number }) => p.playerId),
 );
 const consideredBatters = players.records.filter(
-  (r: { role: string; playerId: number }) => r.role === 'batter' && consideredIds.has(r.playerId),
+  (r: { role: string; playerId: number; matches: number | null }) =>
+    r.role === 'batter' && consideredIds.has(r.playerId) && r.matches !== null && r.matches >= 10,
 );
 describe('rankings with real imported data', () => {
   beforeEach(() => {

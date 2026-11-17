@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import { HashRouter } from 'react-router-dom';
 import { vi } from 'vitest';
 import { DataProvider, useData } from '../../src/data/DataProvider';
@@ -29,6 +29,12 @@ vi.mock('recharts', async () => {
 
 function CheckSharedData() {
   const data = useData();
+  for (const record of data.records.values()) expect(record.matches).toBeGreaterThanOrEqual(10);
+  const ishan = data.searchIndex.find((p) => p.identity.playerId === 4117);
+  expect(ishan?.identity.roles).toEqual(['batter']);
+  expect(ishan?.records.bowler).toBeUndefined();
+  expect(data.identities.has(8638)).toBe(false);
+  expect(data.identities.has(39444)).toBe(false);
   const excludedIds = source.identities
     .filter((p: { nationality: string }) => p.nationality === 'Pakistan')
     .map((p: { playerId: number }) => p.playerId);
@@ -70,7 +76,7 @@ describe('exclusion throughout dashboard navigation', () => {
       </HashRouter>,
     );
     await screen.findByRole('heading', { name: 'Jasprit Bumrah' });
-    expect(screen.getByText('of 605 bowlers').closest('.rank-line')).toHaveTextContent('#2');
+    expect(screen.getByText('of 247 bowlers').closest('.rank-line')).toHaveTextContent('#2');
     expect(screen.getByText('Original source rank').parentElement).toHaveTextContent('#4');
   });
   it('uses the revised ranks in the comparison grid', async () => {
@@ -88,6 +94,50 @@ describe('exclusion throughout dashboard navigation', () => {
     const row = table.querySelector('tbody tr:nth-child(2)');
     expect(row).toHaveTextContent('#2');
     expect(row).toHaveTextContent('#3');
+  });
+  it('retains a player only in the role with at least ten analysed matches', async () => {
+    window.location.hash = '/player?role=batter&id=4117&m=B';
+    render(
+      <HashRouter>
+        <DataProvider>
+          <PlayerPage />
+        </DataProvider>
+      </HashRouter>,
+    );
+    await screen.findByRole('heading', { name: 'Ishan Kishan' });
+    expect(screen.getByText('122')).toBeInTheDocument();
+    expect(screen.getByRole('radio', { name: 'Bowler' })).toHaveAttribute('aria-disabled', 'true');
+    expect(
+      screen.queryByRole('heading', { name: 'Batting & Bowling view' }),
+    ).not.toBeInTheDocument();
+  });
+  it('blocks a saved low-sample role profile while keeping the eligible role available', async () => {
+    window.location.hash = '/player?role=bowler&id=4117&m=C';
+    render(
+      <HashRouter>
+        <DataProvider>
+          <PlayerPage />
+        </DataProvider>
+      </HashRouter>,
+    );
+    await screen.findByRole('heading', { name: 'No eligible score for this role' });
+    fireEvent.click(screen.getByRole('radio', { name: 'Batter' }));
+    await screen.findByRole('heading', { name: 'Ishan Kishan' });
+    expect(window.location.hash).toContain('role=batter');
+  });
+  it('drops low-sample bowling IDs from a saved comparison without removing qualified bowlers', async () => {
+    window.location.hash = '/compare?role=bowler&ids=4117,6281,4722&m=B';
+    render(
+      <HashRouter>
+        <DataProvider>
+          <ComparePage />
+        </DataProvider>
+      </HashRouter>,
+    );
+    await screen.findByRole('table', { name: 'Pressure performance comparison for 2 bowlers' });
+    await waitFor(() => expect(window.location.hash).not.toContain('4117'));
+    expect(screen.getByRole('button', { name: 'Remove Abhishek Sharma' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Remove Rashid Khan' })).toBeInTheDocument();
   });
   it('filters every shared lookup and recalculates dashboard ranks/populations while retaining source metadata', async () => {
     window.location.hash = '/';
