@@ -5,7 +5,7 @@ import { useData } from '../../data/DataProvider';
 import { useMethod } from '../../routes';
 import { MethodSelector } from '../common/Selectors';
 import { formatDate } from '../../domain/format';
-import { METHOD_NAMES } from '../../config/constants';
+import { METHOD_NAMES, CONSIDERATION_NOTE } from '../../config/constants';
 import { MethodologyDrawer } from './MethodologyDrawer';
 const nav = [
   { path: '/', label: 'Rankings', mobile: 'Rankings', Icon: ChartNoAxesColumnIncreasing },
@@ -76,6 +76,7 @@ export function AppLayout() {
           <p>
             Scores indicate pressure-performance, not auction valuation, squad fit, or availability.
           </p>
+          <p>{CONSIDERATION_NOTE}</p>
         </div>
         <details>
           <summary>Data sources</summary>

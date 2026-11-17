@@ -7,6 +7,17 @@ import HomePage from '../../src/pages/HomePage';
 import { MethodSelector } from '../../src/components/common/Selectors';
 const meta = JSON.parse(fs.readFileSync('public/data/meta.json', 'utf8'));
 const players = JSON.parse(fs.readFileSync('public/data/players.json', 'utf8'));
+const consideredIds = new Set(
+  players.identities
+    .filter(
+      (p: { nationality: string | null }) =>
+        (p.nationality ?? '').trim().toLowerCase() !== 'pakistan',
+    )
+    .map((p: { playerId: number }) => p.playerId),
+);
+const consideredBatters = players.records.filter(
+  (r: { role: string; playerId: number }) => r.role === 'batter' && consideredIds.has(r.playerId),
+);
 describe('rankings with real imported data', () => {
   beforeEach(() => {
     window.location.hash = '/';
@@ -43,10 +54,7 @@ describe('rankings with real imported data', () => {
     fireEvent.click(screen.getByRole('radio', { name: 'Option C — Consistency Adjusted' }));
     expect(window.location.hash).toContain('m=C');
     expect(window.location.hash).toContain('bp=3');
-    const rank101 = players.records.find(
-      (r: { role: string; methods: { C: { rank: number } } }) =>
-        r.role === 'batter' && r.methods.C.rank === 101,
-    );
+    const rank101 = [...consideredBatters].sort((a, b) => a.methods.C.rank - b.methods.C.rank)[100];
     const name = players.identities.find(
       (p: { playerId: number }) => p.playerId === rank101.playerId,
     ).name;
@@ -58,10 +66,10 @@ describe('rankings with real imported data', () => {
     expect(window.location.hash).toContain('bp=3');
     expect(window.location.hash).toContain('wp=2');
     const batRegion = screen.getByRole('region', { name: 'Top Batters Under Pressure' });
-    const lastPage = Math.ceil(meta.population.C.batter / 50);
+    const lastPage = Math.ceil(consideredBatters.length / 50);
     fireEvent.click(within(batRegion).getByRole('button', { name: `Page ${lastPage}` }));
     expect(within(batting).getAllByRole('row')).toHaveLength(
-      meta.population.C.batter - (lastPage - 1) * 50 + 1,
+      consideredBatters.length - (lastPage - 1) * 50 + 1,
     );
     expect(within(batRegion).getByRole('button', { name: 'Next page' })).toBeDisabled();
     fireEvent.click(within(batRegion).getByRole('button', { name: 'Show top 10' }));

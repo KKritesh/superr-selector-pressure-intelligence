@@ -33,6 +33,14 @@ Use a local server; opening `dist/index.html` directly with `file://` will not l
 - Methodology drawer, tooltips, loading/retry/empty states, mobile navigation and responsive styles.
 - Shared chart wrapper with actual match dates, straight segments, fixed 0–100 scale, individual observation markers, series toggles and a data-table alternative.
 
+## Current consideration filter
+
+Players whose source nationality is `Pakistan` are excluded before dashboard lookup, search and ranking indexes are built. The rule also blocks their saved profile URLs and removes their IDs from saved comparisons, under both scoring methods and roles. Matching trims whitespace and ignores case; it does not infer nationality from names. Other or missing nationalities remain available.
+
+The filter is configured in `src/config/constants.ts` and applied once by `src/domain/eligibility.ts` in `DataProvider`. It leaves the original Excel workbooks, generated reference JSON, approved scores, source ranks and source percentiles intact. Pagination counts use the filtered lists; source rank/percentile denominators retain their full-dataset reference, as stated in the footer and tooltip. The current data excludes 65 identities (61 batting and 42 bowling records), leaving 827 batters and 605 bowlers.
+
+The dashboard is privately hosted at https://superr-selector-pressure-intelligence.mysticwarbler2.chatgpt.site for the owner's account.
+
 ## Data and refresh
 
 Place updated files in `data/source/` and run `npm run data:build`, then restart the dev server or rebuild `dist/`. Counts, rankings, percentiles, page counts, history and dates are derived from the new files. No source edits are needed when the schema is unchanged.
@@ -105,7 +113,7 @@ npm run test:browser
 
 It serves the production bundle locally, checks the main selection path, independent pagination/Back, page overflow at the four requested widths, JavaScript errors and real-browser axe violations. Safari/Firefox/Edge and the unaided executive usability test still need manual review.
 
-No site has been published. No backend, accounts, scoring framework changes, auction valuation or combined all-rounder score are included.
+The existing static application is published as an owner-only ChatGPT Site. No backend, scoring framework changes, auction valuation or combined all-rounder score are included.
 
 ## Handoff files
 

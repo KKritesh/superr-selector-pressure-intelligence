@@ -9,6 +9,9 @@ export const HALF_LIFE_DAYS = 183;
 export const NARROW_LEAD = 1;
 export const CLEAR_LEAD = 3;
 export const MAX_COMPARE = 5;
+export const EXCLUDED_NATIONALITIES = ['Pakistan'] as const;
+export const CONSIDERATION_NOTE =
+  'Nationality filter: Pakistan excluded. Ranks and percentiles refer to the full source dataset.';
 export const METHOD_NAMES = {
   B: 'Option B — Bayesian',
   C: 'Option C — Consistency Adjusted',
@@ -22,7 +25,7 @@ export const TOOLTIPS = {
   C: 'Option C — Consistency Adjusted: starts from Option B and lowers the score of players whose results swing widely from match to match.',
   master:
     'Overall rating out of 100 for how well this player performs when the match is tough. Higher is better.',
-  rank: 'Position among all players of this role. A 93rd percentile means higher than 93% of them.',
+  rank: 'Position and percentile among all players of this role in the full source dataset. Nationality exclusions change who appears for consideration.',
   realtime:
     'Supporting metric: how well the player handled the live match situation. Weighted towards recent matches.',
   individual:
