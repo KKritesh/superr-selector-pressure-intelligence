@@ -25,17 +25,15 @@ export function sheet(wb: XLSX.WorkBook, file: string, name: string, required: s
   const missing = required.filter((k) => !header.includes(k));
   if (missing.length)
     throw new Error(`${path.basename(file)} › ${name} › missing column(s): ${missing.join(', ')}`);
-  return data
-    .slice(1)
-    .flatMap((values, index) =>
-      values.every((v) => v === null)
-        ? []
-        : [
-            Object.assign(Object.fromEntries(header.map((k, i) => [k, values[i] ?? null])), {
-              __row: index + 2,
-            }) as Row,
-          ],
-    );
+  return data.slice(1).flatMap((values, index) =>
+    values.every((v) => v === null)
+      ? []
+      : [
+          Object.assign(Object.fromEntries(header.map((k, i) => [k, values[i] ?? null])), {
+            __row: index + 2,
+          }) as Row,
+        ],
+  );
 }
 export function num(value: unknown, context: string): number | null {
   if (value === null || value === undefined || value === '') return null;

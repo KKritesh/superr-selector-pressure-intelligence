@@ -87,6 +87,26 @@ describe('profile and search interactions', () => {
     fireEvent.keyDown(input, { key: 'Escape' });
     expect(input).toHaveAttribute('aria-expanded', 'false');
   });
+  it('disables an unavailable role and hides the dual-role panel for a single-role player', async () => {
+    setup('/player?role=batter&id=50284&m=B');
+    render(
+      <HashRouter>
+        <DataProvider>
+          <PlayerPage />
+        </DataProvider>
+      </HashRouter>,
+    );
+    expect(
+      await screen.findByRole('heading', { name: 'Vaibhav Sooryavanshi' }),
+    ).toBeInTheDocument();
+    const bowlingRole = screen.getByRole('radio', { name: 'Bowler' });
+    expect(bowlingRole).toHaveAttribute('aria-disabled', 'true');
+    fireEvent.click(bowlingRole);
+    expect(window.location.hash).toContain('role=batter');
+    expect(
+      screen.queryByRole('heading', { name: 'Batting & Bowling view' }),
+    ).not.toBeInTheDocument();
+  });
   it('shows an invalid-ID state without inventing a profile', async () => {
     setup('/player?role=batter&id=999999');
     render(

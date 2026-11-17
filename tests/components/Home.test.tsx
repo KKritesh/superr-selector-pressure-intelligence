@@ -52,5 +52,21 @@ describe('rankings with real imported data', () => {
     ).name;
     expect(within(batting).getAllByRole('row')[1]).toHaveTextContent(name);
     expect(within(bowling).getAllByRole('row')).toHaveLength(11);
+    fireEvent.click(screen.getByRole('button', { name: 'See more bowlers' }));
+    const bowlRegion = screen.getByRole('region', { name: 'Top Bowlers Under Pressure' });
+    fireEvent.click(within(bowlRegion).getByRole('button', { name: 'Page 2' }));
+    expect(window.location.hash).toContain('bp=3');
+    expect(window.location.hash).toContain('wp=2');
+    const batRegion = screen.getByRole('region', { name: 'Top Batters Under Pressure' });
+    const lastPage = Math.ceil(meta.population.C.batter / 50);
+    fireEvent.click(within(batRegion).getByRole('button', { name: `Page ${lastPage}` }));
+    expect(within(batting).getAllByRole('row')).toHaveLength(
+      meta.population.C.batter - (lastPage - 1) * 50 + 1,
+    );
+    expect(within(batRegion).getByRole('button', { name: 'Next page' })).toBeDisabled();
+    fireEvent.click(within(batRegion).getByRole('button', { name: 'Show top 10' }));
+    expect(within(batting).getAllByRole('row')).toHaveLength(11);
+    expect(within(bowling).getAllByRole('row')).toHaveLength(51);
+    expect(window.location.hash).toContain('wp=2');
   });
 });

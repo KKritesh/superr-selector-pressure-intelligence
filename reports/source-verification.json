@@ -1,0 +1,1001 @@
+{
+  "generatedAt": "2026-11-17T13:02:35.156Z",
+  "status": "passed",
+  "allRecordChecks": 12280,
+  "roleRecords": 1535,
+  "sampledPlayers": 10,
+  "population": {
+    "B": {
+      "batter": 888,
+      "bowler": 647
+    },
+    "C": {
+      "batter": 888,
+      "bowler": 647
+    }
+  },
+  "results": [
+    {
+      "playerId": 6281,
+      "role": "batter",
+      "name": "Abhishek Sharma",
+      "passed": true,
+      "values": {
+        "B": {
+          "master": 41.76894308475839,
+          "rank": 1,
+          "rankDisplay": "#1",
+          "isTied": false,
+          "percentile": 100
+        },
+        "C": {
+          "master": 40.66861393704027,
+          "rank": 1,
+          "rankDisplay": "#1",
+          "isTied": false,
+          "percentile": 100,
+          "consistencyPenalty": 1.100329147718124,
+          "weightedSd": 8.480931507145772,
+          "rankDiffVsB": 0
+        },
+        "matches": 134,
+        "ESS": 59.40758204845538,
+        "realtime": 31.650220659998407,
+        "individual": 67.53162901425924,
+        "last10": [
+          {
+            "matchId": 50404,
+            "date": "2026-10-06",
+            "final": 45.35290391393603,
+            "realtime": 29.14048954142478,
+            "individual": 75.4616734628855,
+            "label": "West Indies"
+          },
+          {
+            "matchId": 50405,
+            "date": "2026-10-09",
+            "final": 46.60612030767059,
+            "realtime": 37.3194935606952,
+            "individual": 63.85271283776774,
+            "label": "West Indies"
+          },
+          {
+            "matchId": 50406,
+            "date": "2026-10-11",
+            "final": 46.33075232334132,
+            "realtime": 36.97478949090184,
+            "individual": 63.70611186930036,
+            "label": "West Indies"
+          },
+          {
+            "matchId": 50407,
+            "date": "2026-10-14",
+            "final": 40.66664981895138,
+            "realtime": 18.94316578892012,
+            "individual": 81.01026301758087,
+            "label": "West Indies"
+          },
+          {
+            "matchId": 50408,
+            "date": "2026-10-17",
+            "final": 46.83118966553657,
+            "realtime": 34.47768800513964,
+            "individual": 69.77340703484515,
+            "label": "West Indies"
+          },
+          {
+            "matchId": 54210,
+            "date": "2026-10-22",
+            "final": 51.25282960118007,
+            "realtime": 45.64146247451632,
+            "individual": 61.67393997926987,
+            "label": "New Zealand"
+          },
+          {
+            "matchId": 54211,
+            "date": "2026-10-24",
+            "final": 37.46187437584036,
+            "realtime": 19.76049236910264,
+            "individual": 70.3358695312104,
+            "label": "New Zealand"
+          },
+          {
+            "matchId": 54212,
+            "date": "2026-10-27",
+            "final": 52.25809685658412,
+            "realtime": 47.38701260370868,
+            "individual": 61.30439618335281,
+            "label": "New Zealand"
+          },
+          {
+            "matchId": 54213,
+            "date": "2026-10-30",
+            "final": 37.38868763662281,
+            "realtime": 23.72622366161965,
+            "individual": 62.76183501877152,
+            "label": "New Zealand"
+          },
+          {
+            "matchId": 54214,
+            "date": "2026-11-01",
+            "final": 34.67212782671118,
+            "realtime": 19.57696238155687,
+            "individual": 62.70600651056918,
+            "label": "New Zealand"
+          }
+        ]
+      }
+    },
+    {
+      "playerId": 50284,
+      "role": "batter",
+      "name": "Vaibhav Sooryavanshi",
+      "passed": true,
+      "values": {
+        "B": {
+          "master": 39.30496352469797,
+          "rank": 2,
+          "rankDisplay": "#2",
+          "isTied": false,
+          "percentile": 100
+        },
+        "C": {
+          "master": 37.50523726111865,
+          "rank": 2,
+          "rankDisplay": "#2",
+          "isTied": false,
+          "percentile": 100,
+          "consistencyPenalty": 1.799726263579318,
+          "weightedSd": 9.541455102146651,
+          "rankDiffVsB": 0
+        },
+        "matches": 35,
+        "ESS": 28.10711776255912,
+        "realtime": 35.699326953061444,
+        "individual": 59.44927067824143,
+        "last10": [
+          {
+            "matchId": 50943,
+            "date": "2026-05-27",
+            "final": 67.17732671875527,
+            "realtime": 67.51513019178441,
+            "individual": 66.54997741170116,
+            "label": "Sunrisers Hyderabad"
+          },
+          {
+            "matchId": 50944,
+            "date": "2026-05-29",
+            "final": 55.22531517178341,
+            "realtime": 45.93661283721548,
+            "individual": 72.47576236455242,
+            "label": "Gujarat Titans"
+          },
+          {
+            "matchId": 45391,
+            "date": "2026-07-04",
+            "final": 37.53972564884744,
+            "realtime": 25.64191419561584,
+            "individual": 59.635661204849,
+            "label": "England"
+          },
+          {
+            "matchId": 45392,
+            "date": "2026-07-07",
+            "final": 48.38042668384663,
+            "realtime": 42.49935426992614,
+            "individual": 59.30241830969896,
+            "label": "England"
+          },
+          {
+            "matchId": 45393,
+            "date": "2026-07-09",
+            "final": 42.64472385506696,
+            "realtime": 33.81230110037774,
+            "individual": 59.04779468520409,
+            "label": "England"
+          },
+          {
+            "matchId": 50507,
+            "date": "2026-07-23",
+            "final": 44.34200106460339,
+            "realtime": 36.54771383595597,
+            "individual": 58.81710591780575,
+            "label": "Zimbabwe"
+          },
+          {
+            "matchId": 50508,
+            "date": "2026-07-25",
+            "final": 49.64548239149104,
+            "realtime": 38.78678475740443,
+            "individual": 69.81163514050903,
+            "label": "Zimbabwe"
+          },
+          {
+            "matchId": 50509,
+            "date": "2026-07-26",
+            "final": 46.17962852719975,
+            "realtime": 33.71237596899658,
+            "individual": 69.33309756386278,
+            "label": "Zimbabwe"
+          },
+          {
+            "matchId": 54211,
+            "date": "2026-10-24",
+            "final": 28.19921857919451,
+            "realtime": 11.84618951412772,
+            "individual": 58.56912970003285,
+            "label": "New Zealand"
+          },
+          {
+            "matchId": 54212,
+            "date": "2026-10-27",
+            "final": 42.96258522923151,
+            "realtime": 35.90920664668793,
+            "individual": 56.06171688252675,
+            "label": "New Zealand"
+          }
+        ]
+      }
+    },
+    {
+      "playerId": 4117,
+      "role": "batter",
+      "name": "Ishan Kishan",
+      "passed": true,
+      "values": {
+        "B": {
+          "master": 38.10272007462385,
+          "rank": 3,
+          "rankDisplay": "#3",
+          "isTied": false,
+          "percentile": 100
+        },
+        "C": {
+          "master": 36.84505713894539,
+          "rank": 3,
+          "rankDisplay": "#3",
+          "isTied": false,
+          "percentile": 100,
+          "consistencyPenalty": 1.257662935678462,
+          "weightedSd": 8.305732618477368,
+          "rankDiffVsB": 0
+        },
+        "matches": 122,
+        "ESS": 43.61414547391117,
+        "realtime": 30.582869954709906,
+        "individual": 58.90165933524413,
+        "last10": [
+          {
+            "matchId": 54410,
+            "date": "2026-09-17",
+            "final": 44.07000342069298,
+            "realtime": 30.53265246208014,
+            "individual": 69.21079805811685,
+            "label": "Afghanistan"
+          },
+          {
+            "matchId": 54711,
+            "date": "2026-09-22",
+            "final": 32.82609730800382,
+            "realtime": 20.44043420795039,
+            "individual": 55.82804306524592,
+            "label": "Japan"
+          },
+          {
+            "matchId": 50404,
+            "date": "2026-10-06",
+            "final": 50.19993707090137,
+            "realtime": 40.16429407156168,
+            "individual": 68.83755978396078,
+            "label": "West Indies"
+          },
+          {
+            "matchId": 50405,
+            "date": "2026-10-09",
+            "final": 49.09780197853812,
+            "realtime": 44.32740414061229,
+            "individual": 57.95711224897179,
+            "label": "West Indies"
+          },
+          {
+            "matchId": 50406,
+            "date": "2026-10-11",
+            "final": 42.04461915527855,
+            "realtime": 34.5701088809471,
+            "individual": 55.92585252189411,
+            "label": "West Indies"
+          },
+          {
+            "matchId": 50407,
+            "date": "2026-10-14",
+            "final": 42.54173332172981,
+            "realtime": 26.67638773731265,
+            "individual": 72.00594654993311,
+            "label": "West Indies"
+          },
+          {
+            "matchId": 50408,
+            "date": "2026-10-17",
+            "final": 57.64538872373717,
+            "realtime": 53.49182812314119,
+            "individual": 65.35914412484398,
+            "label": "West Indies"
+          },
+          {
+            "matchId": 54210,
+            "date": "2026-10-22",
+            "final": 36.6266642205086,
+            "realtime": 26.37562528386738,
+            "individual": 55.66430795998515,
+            "label": "New Zealand"
+          },
+          {
+            "matchId": 54213,
+            "date": "2026-10-30",
+            "final": 26.23800511589962,
+            "realtime": 10.83731776529706,
+            "individual": 54.83928162416152,
+            "label": "New Zealand"
+          },
+          {
+            "matchId": 54214,
+            "date": "2026-11-01",
+            "final": 42.70599806772714,
+            "realtime": 36.30811490667877,
+            "individual": 54.5877810811027,
+            "label": "New Zealand"
+          }
+        ]
+      }
+    },
+    {
+      "playerId": 4722,
+      "role": "bowler",
+      "name": "Rashid Khan",
+      "passed": true,
+      "values": {
+        "B": {
+          "master": 42.24158325857086,
+          "rank": 1,
+          "rankDisplay": "#1",
+          "isTied": false,
+          "percentile": 100
+        },
+        "C": {
+          "master": 41.43148853969875,
+          "rank": 1,
+          "rankDisplay": "#1",
+          "isTied": false,
+          "percentile": 100,
+          "consistencyPenalty": 0.8100947188721157,
+          "weightedSd": 5.087812602973557,
+          "rankDiffVsB": 0
+        },
+        "matches": 122,
+        "ESS": 39.44487749841849,
+        "realtime": 29.44210551225057,
+        "individual": 71.48694124356611,
+        "last10": [
+          {
+            "matchId": 50387,
+            "date": "2026-05-21",
+            "final": 50.66760328865884,
+            "realtime": 37.91378068623129,
+            "individual": 74.3532738360243,
+            "label": "Chennai Super Kings"
+          },
+          {
+            "matchId": 50942,
+            "date": "2026-05-26",
+            "final": 37.58310629379206,
+            "realtime": 19.56513885678611,
+            "individual": 71.04504581966026,
+            "label": "Royal Challengers Bengaluru"
+          },
+          {
+            "matchId": 50944,
+            "date": "2026-05-29",
+            "final": 37.06640916337207,
+            "realtime": 17.38790784807014,
+            "individual": 73.61219732036137,
+            "label": "Rajasthan Royals"
+          },
+          {
+            "matchId": 50945,
+            "date": "2026-05-31",
+            "final": 44.86930324627339,
+            "realtime": 29.80060239120467,
+            "individual": 72.85403340568674,
+            "label": "Royal Challengers Bengaluru"
+          },
+          {
+            "matchId": 54408,
+            "date": "2026-09-13",
+            "final": 36.43694471163469,
+            "realtime": 18.56269211171522,
+            "individual": 69.63198525434227,
+            "label": "India"
+          },
+          {
+            "matchId": 54409,
+            "date": "2026-09-15",
+            "final": 41.66709338159188,
+            "realtime": 27.24804563245605,
+            "individual": 68.44532491570129,
+            "label": "India"
+          },
+          {
+            "matchId": 54410,
+            "date": "2026-09-17",
+            "final": 45.37931521603757,
+            "realtime": 32.18484364649863,
+            "individual": 69.88333384518133,
+            "label": "India"
+          },
+          {
+            "matchId": 55559,
+            "date": "2026-10-27",
+            "final": 44.26227311668709,
+            "realtime": 30.88976024429222,
+            "individual": 69.09693987970614,
+            "label": "Zimbabwe"
+          },
+          {
+            "matchId": 55560,
+            "date": "2026-10-29",
+            "final": 42.39316296107499,
+            "realtime": 26.41808998090376,
+            "individual": 72.06115563853587,
+            "label": "Zimbabwe"
+          },
+          {
+            "matchId": 55561,
+            "date": "2026-11-01",
+            "final": 47.63131928546498,
+            "realtime": 35.73473926205125,
+            "individual": 69.72496790037619,
+            "label": "Zimbabwe"
+          }
+        ]
+      }
+    },
+    {
+      "playerId": 2490,
+      "role": "bowler",
+      "name": "Mohammad Nawaz",
+      "passed": true,
+      "values": {
+        "B": {
+          "master": 41.6184485336997,
+          "rank": 2,
+          "rankDisplay": "#2",
+          "isTied": false,
+          "percentile": 100
+        },
+        "C": {
+          "master": 40.61218165760877,
+          "rank": 2,
+          "rankDisplay": "#2",
+          "isTied": false,
+          "percentile": 100,
+          "consistencyPenalty": 1.006266876090924,
+          "weightedSd": 5.369151989672527,
+          "rankDiffVsB": 0
+        },
+        "matches": 52,
+        "ESS": 28.46984103894652,
+        "realtime": 32.35687197664985,
+        "individual": 73.20397452589084,
+        "last10": [
+          {
+            "matchId": 47976,
+            "date": "2025-11-17",
+            "final": 51.54642322724302,
+            "realtime": 40.37698842637046,
+            "individual": 72.28965928600634,
+            "label": "Zimbabwe"
+          },
+          {
+            "matchId": 47978,
+            "date": "2025-11-22",
+            "final": 53.18074103361823,
+            "realtime": 40.49269466378875,
+            "individual": 76.74425572044441,
+            "label": "Sri Lanka"
+          },
+          {
+            "matchId": 47979,
+            "date": "2025-11-23",
+            "final": 48.81208597082831,
+            "realtime": 32.57864743450472,
+            "individual": 78.95990039542924,
+            "label": "Zimbabwe"
+          },
+          {
+            "matchId": 47981,
+            "date": "2025-11-27",
+            "final": 35.06612557758087,
+            "realtime": 10.70590535002947,
+            "individual": 80.30653457160491,
+            "label": "Sri Lanka"
+          },
+          {
+            "matchId": 47982,
+            "date": "2025-11-29",
+            "final": 49.3268425748501,
+            "realtime": 33.60846632430717,
+            "individual": 78.51811275442984,
+            "label": "Sri Lanka"
+          },
+          {
+            "matchId": 48512,
+            "date": "2026-01-07",
+            "final": 42.66481554306496,
+            "realtime": 25.09067458665079,
+            "individual": 75.30250589069126,
+            "label": "Sri Lanka"
+          },
+          {
+            "matchId": 48514,
+            "date": "2026-01-12",
+            "final": 45.8915688973135,
+            "realtime": 30.10500826690808,
+            "individual": 75.2094672109236,
+            "label": "Sri Lanka"
+          },
+          {
+            "matchId": 48915,
+            "date": "2026-01-29",
+            "final": 47.49533303368048,
+            "realtime": 30.82862524929016,
+            "individual": 78.44779034754825,
+            "label": "Australia"
+          },
+          {
+            "matchId": 48916,
+            "date": "2026-01-31",
+            "final": 51.76712268510964,
+            "realtime": 37.38957025039276,
+            "individual": 78.46829149244098,
+            "label": "Australia"
+          },
+          {
+            "matchId": 48917,
+            "date": "2026-02-01",
+            "final": 49.12018615187156,
+            "realtime": 33.41689925240859,
+            "individual": 78.28343325087424,
+            "label": "Australia"
+          }
+        ]
+      }
+    },
+    {
+      "playerId": 5979,
+      "role": "bowler",
+      "name": "Abrar Ahmed",
+      "passed": true,
+      "values": {
+        "B": {
+          "master": 40.81805748577273,
+          "rank": 3,
+          "rankDisplay": "#3",
+          "isTied": false,
+          "percentile": 100
+        },
+        "C": {
+          "master": 39.57168255876505,
+          "rank": 3,
+          "rankDisplay": "#3",
+          "isTied": false,
+          "percentile": 100,
+          "consistencyPenalty": 1.24637492700768,
+          "weightedSd": 5.741140887601207,
+          "rankDiffVsB": 0
+        },
+        "matches": 35,
+        "ESS": 21.21773404955176,
+        "realtime": 33.02269424091513,
+        "individual": 66.09387263910095,
+        "last10": [
+          {
+            "matchId": 47978,
+            "date": "2025-11-22",
+            "final": 49.52684018416333,
+            "realtime": 37.76654456346156,
+            "individual": 71.36738919403805,
+            "label": "Sri Lanka"
+          },
+          {
+            "matchId": 47981,
+            "date": "2025-11-27",
+            "final": 44.75660633963028,
+            "realtime": 29.8643759688923,
+            "individual": 72.41360559957224,
+            "label": "Sri Lanka"
+          },
+          {
+            "matchId": 47982,
+            "date": "2025-11-29",
+            "final": 48.29915201670133,
+            "realtime": 33.49794267384743,
+            "individual": 75.7871122248586,
+            "label": "Sri Lanka"
+          },
+          {
+            "matchId": 48512,
+            "date": "2026-01-07",
+            "final": 47.09275085491775,
+            "realtime": 33.34880178248918,
+            "individual": 72.61722770371365,
+            "label": "Sri Lanka"
+          },
+          {
+            "matchId": 48514,
+            "date": "2026-01-12",
+            "final": 39.09748758762056,
+            "realtime": 17.79945969359671,
+            "individual": 78.65096796223631,
+            "label": "Sri Lanka"
+          },
+          {
+            "matchId": 48915,
+            "date": "2026-01-29",
+            "final": 52.35689156331829,
+            "realtime": 39.25367168851614,
+            "individual": 76.69144275937941,
+            "label": "Australia"
+          },
+          {
+            "matchId": 48916,
+            "date": "2026-01-31",
+            "final": 56.49099397514381,
+            "realtime": 44.29312257855972,
+            "individual": 79.14418371165712,
+            "label": "Australia"
+          },
+          {
+            "matchId": 48917,
+            "date": "2026-02-01",
+            "final": 49.98847774122406,
+            "realtime": 32.96580442868258,
+            "individual": 81.60201389308682,
+            "label": "Australia"
+          },
+          {
+            "matchId": 55078,
+            "date": "2026-10-09",
+            "final": 40.93587588101491,
+            "realtime": 26.01607366899491,
+            "individual": 68.64407998905205,
+            "label": "Sri Lanka"
+          },
+          {
+            "matchId": 55079,
+            "date": "2026-10-11",
+            "final": 36.82779821728113,
+            "realtime": 36.92671967138043,
+            "individual": 36.64408694538244,
+            "label": "Sri Lanka"
+          }
+        ]
+      }
+    },
+    {
+      "playerId": 54404,
+      "role": "batter",
+      "name": "Benjamin Ito",
+      "passed": true,
+      "values": {
+        "B": {
+          "master": 26.23785218578291,
+          "rank": 99,
+          "rankDisplay": "#99",
+          "isTied": false,
+          "percentile": 89
+        },
+        "C": {
+          "master": 26.23785218578291,
+          "rank": 64,
+          "rankDisplay": "#64",
+          "isTied": false,
+          "percentile": 93,
+          "consistencyPenalty": 0,
+          "weightedSd": 0,
+          "rankDiffVsB": 35
+        },
+        "matches": 1,
+        "ESS": 1,
+        "realtime": 34.8498188801858,
+        "individual": 26.93119059722004,
+        "last10": [
+          {
+            "matchId": 54711,
+            "date": "2026-09-22",
+            "final": 32.07829898114779,
+            "realtime": 34.8498188801858,
+            "individual": 26.93119059722004,
+            "label": "India"
+          }
+        ]
+      }
+    },
+    {
+      "playerId": 7446,
+      "role": "batter",
+      "name": "Abdul Samad",
+      "passed": true,
+      "values": {
+        "B": {
+          "master": 25.36735730626494,
+          "rank": 169,
+          "rankDisplay": "#169",
+          "isTied": false,
+          "percentile": 81
+        },
+        "C": {
+          "master": 23.90259457289071,
+          "rank": 313,
+          "rankDisplay": "#313",
+          "isTied": false,
+          "percentile": 65,
+          "consistencyPenalty": 1.464762733374231,
+          "weightedSd": 5.713073472772337,
+          "rankDiffVsB": -144
+        },
+        "matches": 41,
+        "ESS": 15.21265634027811,
+        "realtime": 22.308170024735738,
+        "individual": 31.264239098341015,
+        "last10": [
+          {
+            "matchId": 40747,
+            "date": "2025-05-04",
+            "final": 32.58312205550449,
+            "realtime": 35.47577767263688,
+            "individual": 27.21104733797289,
+            "label": "Punjab Kings"
+          },
+          {
+            "matchId": 40763,
+            "date": "2025-05-19",
+            "final": 27.75852378480211,
+            "realtime": 22.1812037082579,
+            "individual": 38.11640392695563,
+            "label": "Sunrisers Hyderabad"
+          },
+          {
+            "matchId": 40752,
+            "date": "2025-05-27",
+            "final": 24.95541949632193,
+            "realtime": 18.78927822096388,
+            "individual": 36.40682472198689,
+            "label": "Royal Challengers Bengaluru"
+          },
+          {
+            "matchId": 50129,
+            "date": "2026-04-01",
+            "final": 27.62697757969203,
+            "realtime": 23.8298865729489,
+            "individual": 34.67871802078642,
+            "label": "Delhi Capitals"
+          },
+          {
+            "matchId": 50134,
+            "date": "2026-04-05",
+            "final": 23.54638813917597,
+            "realtime": 18.05222124968331,
+            "individual": 33.74984093394805,
+            "label": "Sunrisers Hyderabad"
+          },
+          {
+            "matchId": 50139,
+            "date": "2026-04-09",
+            "final": 17.18819429535815,
+            "realtime": 11.85265449803174,
+            "individual": 27.09705391896435,
+            "label": "Kolkata Knight Riders"
+          },
+          {
+            "matchId": 50143,
+            "date": "2026-04-12",
+            "final": 20.58797040714631,
+            "realtime": 16.31123572589807,
+            "individual": 28.53047767232162,
+            "label": "Gujarat Titans"
+          },
+          {
+            "matchId": 50344,
+            "date": "2026-04-15",
+            "final": 17.53402012639601,
+            "realtime": 10.86037008949367,
+            "individual": 29.92794162350036,
+            "label": "Royal Challengers Bengaluru"
+          },
+          {
+            "matchId": 50380,
+            "date": "2026-05-15",
+            "final": 25.22788745248528,
+            "realtime": 24.92029080498731,
+            "individual": 25.79913836926721,
+            "label": "Chennai Super Kings"
+          },
+          {
+            "matchId": 50389,
+            "date": "2026-05-23",
+            "final": 27.57828291295104,
+            "realtime": 28.07313411029259,
+            "individual": 26.65927354645958,
+            "label": "Punjab Kings"
+          }
+        ]
+      }
+    },
+    {
+      "playerId": 15280,
+      "role": "batter",
+      "name": "Sayed Monib",
+      "passed": true,
+      "values": {
+        "B": {
+          "master": 25.29533625461518,
+          "rank": 212,
+          "rankDisplay": "#212",
+          "isTied": false,
+          "percentile": 76
+        },
+        "C": {
+          "master": 17.15319758258894,
+          "rank": 883,
+          "rankDisplay": "#883",
+          "isTied": false,
+          "percentile": 1,
+          "consistencyPenalty": 8.142138672026233,
+          "weightedSd": 14.10244078670807,
+          "rankDiffVsB": -671
+        },
+        "matches": 3,
+        "ESS": 2.999933172041264,
+        "realtime": 32.4510406314511,
+        "individual": 15.888323787006254,
+        "last10": [
+          {
+            "matchId": 16863,
+            "date": "2022-08-21",
+            "final": 12.49474357671605,
+            "realtime": 15.24122473878179,
+            "individual": 7.394135704308249,
+            "label": "United Arab Emirates"
+          },
+          {
+            "matchId": 16865,
+            "date": "2022-08-23",
+            "final": 21.44139658623083,
+            "realtime": 27.3460887319325,
+            "individual": 10.47553974421344,
+            "label": "Hong Kong"
+          },
+          {
+            "matchId": 16867,
+            "date": "2022-08-24",
+            "final": 45.8464393758168,
+            "realtime": 54.55205957006837,
+            "individual": 29.67885901506388,
+            "label": "Singapore"
+          }
+        ]
+      }
+    },
+    {
+      "playerId": 3647,
+      "role": "batter",
+      "name": "Shreyas Iyer",
+      "passed": true,
+      "values": {
+        "B": {
+          "master": 37.03778200101917,
+          "rank": 4,
+          "rankDisplay": "#4",
+          "isTied": false,
+          "percentile": 100
+        },
+        "C": {
+          "master": 35.85743692611796,
+          "rank": 4,
+          "rankDisplay": "#4",
+          "isTied": false,
+          "percentile": 100,
+          "consistencyPenalty": 1.180345074901214,
+          "weightedSd": 7.583811627602401,
+          "rankDiffVsB": 0
+        },
+        "matches": 98,
+        "ESS": 41.28165402710238,
+        "realtime": 28.73572587187362,
+        "individual": 58.72152283139212,
+        "last10": [
+          {
+            "matchId": 50404,
+            "date": "2026-10-06",
+            "final": 63.04854642378766,
+            "realtime": 58.52907632480481,
+            "individual": 71.44184803618438,
+            "label": "West Indies"
+          },
+          {
+            "matchId": 50405,
+            "date": "2026-10-09",
+            "final": 42.27869584751942,
+            "realtime": 32.44435678159886,
+            "individual": 60.54246839851476,
+            "label": "West Indies"
+          },
+          {
+            "matchId": 50406,
+            "date": "2026-10-11",
+            "final": 31.50641781723533,
+            "realtime": 15.24168377676595,
+            "individual": 61.71235246382132,
+            "label": "West Indies"
+          },
+          {
+            "matchId": 50407,
+            "date": "2026-10-14",
+            "final": 37.97463958340605,
+            "realtime": 20.36776161960969,
+            "individual": 70.67312723045643,
+            "label": "West Indies"
+          },
+          {
+            "matchId": 50408,
+            "date": "2026-10-17",
+            "final": 46.96144101173985,
+            "realtime": 35.69636977458572,
+            "individual": 67.88228759502609,
+            "label": "West Indies"
+          },
+          {
+            "matchId": 54210,
+            "date": "2026-10-22",
+            "final": 45.20783451866085,
+            "realtime": 38.13561359074077,
+            "individual": 58.34195909908383,
+            "label": "New Zealand"
+          },
+          {
+            "matchId": 54211,
+            "date": "2026-10-24",
+            "final": 32.10213830508324,
+            "realtime": 12.95260782065898,
+            "individual": 67.66555206187115,
+            "label": "New Zealand"
+          },
+          {
+            "matchId": 54212,
+            "date": "2026-10-27",
+            "final": 27.93931137006366,
+            "realtime": 12.05065531609539,
+            "individual": 57.44681547029045,
+            "label": "New Zealand"
+          },
+          {
+            "matchId": 54213,
+            "date": "2026-10-30",
+            "final": 36.4139223747829,
+            "realtime": 25.82401749158164,
+            "individual": 56.0808885864424,
+            "label": "New Zealand"
+          },
+          {
+            "matchId": 54214,
+            "date": "2026-11-01",
+            "final": 39.35812234345776,
+            "realtime": 30.28597362139606,
+            "individual": 56.20639854157233,
+            "label": "New Zealand"
+          }
+        ]
+      }
+    }
+  ]
+}
