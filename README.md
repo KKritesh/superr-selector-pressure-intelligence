@@ -12,7 +12,7 @@ npm run data:build
 npm run dev
 ```
 
-Open the address Vite prints (normally http://localhost:5173). The first data build can take about half a minute because the match-wise workbook has many columns. Source workbooks and generated data are included in the delivery. After dependencies are installed, the app and data build run locally without third-party runtime requests. Fonts are bundled.
+Open the address Vite prints (normally http://localhost:4173). The first data build can take about half a minute because the match-wise workbook has many columns. Source workbooks and generated data are included in the delivery. After dependencies are installed, the app and data build run locally without third-party runtime requests. Fonts are bundled.
 
 ```sh
 npm test                 # domain, source-fidelity, refresh and component tests
@@ -91,7 +91,7 @@ URL forms: `#/`, `#/player?role=batter&id=6281&m=B`, `#/compare?role=bowler&ids=
 10. **Role vocabulary.** Actual source roles are only `Batter` and `Bowler`. Other values fail the build.
 11. **Form with 8–9 matches.** Following the BRD's ≥8 minimum, compare the latest five against the available 3–4 earlier observations in the preceding five-slot window. Fewer than eight gets the specified insufficient-history label.
 12. **Identity collisions.** Every colliding name is qualified with nationality and player ID. The ID already resolves the same-country Basil Hameed collision, so no additional date suffix is needed.
-13. **Browser verification.** The managed preview relay failed to open port 4173, including after the shared desktop became ready. No separate preview server or infrastructure workaround was used. Browser screenshots at 1440/1024/768/390, layout/touch-target review, real-browser color-contrast/axe checks, load timings, cross-browser coverage and the unaided two-minute usability test remain unverified. Component tests verify DOM interactions, focus handling, chart SVG geometry and axe rules supported by jsdom; they do not substitute for those browser checks. The implementation proceeds to packaging with this limitation recorded rather than claiming the full BRD Definition of Done.
+13. **Browser verification.** The initial managed preview relay failed to open port 4173. A subsequent user-requested startup diagnosis verified a healthy direct Vite server on `0.0.0.0:4173` and live rendering of Rankings, Know Your Player, Compare Players and B/C switching in the shared browser. The managed Sites relay still fails independently. See `PREVIEW_DIAGNOSIS.md`. Full responsive screenshots, touch-target review, browser color-contrast/axe checks, load timings, cross-browser coverage and the unaided two-minute usability test remain unverified. No application, scoring, dataset or UI files changed during that repair.
 
 ## Optional local browser acceptance
 
