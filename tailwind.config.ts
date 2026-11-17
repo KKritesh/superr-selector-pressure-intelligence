@@ -1,0 +1,2 @@
+import type { Config } from 'tailwindcss';
+export default {content:['./index.html','./src/**/*.{ts,tsx}'],theme:{extend:{colors:{ink:{900:'var(--ink-900)',700:'var(--ink-700)'},muted:'var(--slate-500)',line:'var(--line)',canvas:'var(--canvas)',surface:'var(--surface)',bat:'var(--bat-600)',bowl:'var(--bowl-600)'},spacing:{card:'var(--space-5)'},borderRadius:{card:'var(--radius-card)'},fontFamily:{sans:['Inter','system-ui','sans-serif']}}},plugins:[]} satisfies Config;
