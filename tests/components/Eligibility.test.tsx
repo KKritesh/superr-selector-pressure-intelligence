@@ -46,12 +46,50 @@ function CheckSharedData() {
       expect(normalizeComparison('2490,5979,4722', role, method, data.records)).not.toContain(2490);
       expect(normalizeComparison('2490,5979,4722', role, method, data.records)).not.toContain(5979);
     }
-  expect(data.meta.population).toEqual(meta.population);
+  expect(data.sourceMeta.population).toEqual(meta.population);
+  expect(
+    data.searchIndex.find((p) => p.identity.playerId === 2933)?.records.bowler?.methods.B.rank,
+  ).toBe(2);
+  for (const method of ['B', 'C'] as const)
+    for (const role of ['batter', 'bowler'] as const) {
+      const pool = data.ranked[method][role];
+      expect(data.meta.population[method][role]).toBe(pool.length);
+      expect(pool.map((p) => p.record.methods[method].rank)).toEqual(pool.map((_, i) => i + 1));
+    }
   return <p>Shared consideration indexes verified</p>;
 }
 
 describe('exclusion throughout dashboard navigation', () => {
-  it('filters every shared lookup, leaderboard and search index while retaining source reference populations', async () => {
+  it('shows a revised player rank and population with the original source rank in More Details', async () => {
+    window.location.hash = '/player?role=bowler&id=2933&m=B';
+    render(
+      <HashRouter>
+        <DataProvider>
+          <PlayerPage />
+        </DataProvider>
+      </HashRouter>,
+    );
+    await screen.findByRole('heading', { name: 'Jasprit Bumrah' });
+    expect(screen.getByText('of 605 bowlers').closest('.rank-line')).toHaveTextContent('#2');
+    expect(screen.getByText('Original source rank').parentElement).toHaveTextContent('#4');
+  });
+  it('uses the revised ranks in the comparison grid', async () => {
+    window.location.hash = '/compare?role=bowler&ids=2933,830&m=B';
+    render(
+      <HashRouter>
+        <DataProvider>
+          <ComparePage />
+        </DataProvider>
+      </HashRouter>,
+    );
+    const table = await screen.findByRole('table', {
+      name: 'Pressure performance comparison for 2 bowlers',
+    });
+    const row = table.querySelector('tbody tr:nth-child(2)');
+    expect(row).toHaveTextContent('#2');
+    expect(row).toHaveTextContent('#3');
+  });
+  it('filters every shared lookup and recalculates dashboard ranks/populations while retaining source metadata', async () => {
     window.location.hash = '/';
     render(
       <HashRouter>

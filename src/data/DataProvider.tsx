@@ -2,10 +2,12 @@ import { createContext, useContext, useEffect, useMemo, useState, type ReactNode
 import type { Meta, Players, RankedPlayer, Role, Method } from './types';
 import { createSearchIndex } from '../domain/search';
 import { playersForConsideration } from '../domain/eligibility';
+import { reviseRankings } from '../domain/rankings';
 import { loadCore } from './loader';
 import { ErrorPanel, Skeleton } from '../components/common/States';
-function indexData(meta: Meta, sourcePlayers: Players) {
-  const players = playersForConsideration(sourcePlayers);
+function indexData(sourceMeta: Meta, sourcePlayers: Players) {
+  const { players, population } = reviseRankings(playersForConsideration(sourcePlayers));
+  const meta = { ...sourceMeta, population };
   const identities = new Map(players.identities.map((p) => [p.playerId, p]));
   const records = new Map(players.records.map((r) => [`${r.role}:${r.playerId}`, r]));
   const ranked = {} as Record<Method, Record<Role, RankedPlayer[]>>;
@@ -23,6 +25,7 @@ function indexData(meta: Meta, sourcePlayers: Players) {
   }
   return {
     meta,
+    sourceMeta,
     players,
     identities,
     records,

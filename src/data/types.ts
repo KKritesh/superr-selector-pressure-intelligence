@@ -45,6 +45,7 @@ export interface RoleRecord {
   recencyWeightedAvg: number | null;
   benchmark: number | null;
   methods: Record<Method, MethodScore>;
+  sourceMethods?: Readonly<Record<Method, Readonly<MethodScore>>>;
   supporting: {
     realtimeAvg: number | null;
     individualAvg: number | null;

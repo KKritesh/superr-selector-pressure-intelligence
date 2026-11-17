@@ -64,3 +64,7 @@ No application was published, and no source pressure scores or scoring framework
 ## Nationality consideration filter follow-up
 
 All 47 automated tests pass after excluding source nationality `Pakistan` across shared player lookups, leaderboards, search, profiles and comparisons. Tests cover both methods/roles, old URLs, missing nationality, case/whitespace normalization and source-object immutability. The 65 excluded identities account for 61 batting and 42 bowling records. Original source files, reference JSON and scoring pipeline checksums are unchanged. See `reports/nationality-exclusion-tests.json` for this run.
+
+## Revised rankings follow-up
+
+All 55 automated tests pass, and the strict TypeScript/Vite build succeeds. Displayed rankings and percentiles are now recomputed without the excluded nationality for all 827 remaining batters and 605 bowlers under both methods. Independent checks cover every remaining rank and percentile, preserved source scores, ties, zero/null scores, empty/single-player pools, revised B/C rank differences and immutable original provenance. Integration checks cover profile denominators, original-source rank disclosure, search badges and comparison ranks. The original workbooks, reference JSON and scoring pipeline checksums remain unchanged. See `reports/revised-rankings-tests.json`.

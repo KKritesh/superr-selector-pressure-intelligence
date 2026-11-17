@@ -28,7 +28,7 @@ Use a local server; opening `dist/index.html` directly with `file://` will not l
 - Independent batting and bowling Top 10 lists, expandable to 50 rows per page, with independent pagination.
 - Global Option B / Option C selection, carried in the URL.
 - Accessible name/ID search, duplicate-name disambiguation, role chips, arrow-key navigation and keyboard role selection.
-- Profiles with Master Pressure Score, source rank/percentile, matches, Realtime Performance, Individual Player Score, recent/all-match trends, form indicator, dual-role views and source-row details.
+- Profiles with Master Pressure Score, consideration-pool rank/percentile, matches, Realtime Performance, Individual Player Score, recent/all-match trends, form indicator, dual-role views and source-row details.
 - Comparison of 2–5 eligible players, removable selections, role-change notices, six metric rows, displayed-precision leader badges, separate sample-size tags, multi-series trends and deterministic verdicts.
 - Methodology drawer, tooltips, loading/retry/empty states, mobile navigation and responsive styles.
 - Shared chart wrapper with actual match dates, straight segments, fixed 0–100 scale, individual observation markers, series toggles and a data-table alternative.
@@ -37,7 +37,11 @@ Use a local server; opening `dist/index.html` directly with `file://` will not l
 
 Players whose source nationality is `Pakistan` are excluded before dashboard lookup, search and ranking indexes are built. The rule also blocks their saved profile URLs and removes their IDs from saved comparisons, under both scoring methods and roles. Matching trims whitespace and ignores case; it does not infer nationality from names. Other or missing nationalities remain available.
 
-The filter is configured in `src/config/constants.ts` and applied once by `src/domain/eligibility.ts` in `DataProvider`. It leaves the original Excel workbooks, generated reference JSON, approved scores, source ranks and source percentiles intact. Pagination counts use the filtered lists; source rank/percentile denominators retain their full-dataset reference, as stated in the footer and tooltip. The current data excludes 65 identities (61 batting and 42 bowling records), leaving 827 batters and 605 bowlers.
+The filter is configured in `src/config/constants.ts` and applied by `src/domain/eligibility.ts` in `DataProvider`. `src/domain/rankings.ts` then recalculates displayed ranks, rank labels, percentiles and Option B/C rank differences separately for each remaining role/method pool. Rank positions follow descending unchanged pressure scores; ties use competition ranks and share percentiles. Missing scores are unranked. Percentiles use the same strictly-lower, half-up convention with the remaining scored population as denominator.
+
+All dashboard views use these revised rankings and pool sizes, including search role badges, profiles, dual-role panels and comparisons. The current data excludes 65 identities (61 batting and 42 bowling records), leaving 827 batters and 605 bowlers. For example, Jasprit Bumrah is now #2 under Option B bowling rather than the original #4.
+
+Original Excel workbooks, generated reference JSON, master scores, supporting metrics, penalties, weights and scoring benchmarks remain intact. Original ranking values are kept on derived records as `sourceMethods`, and the original selected-method rank appears in More Details. Original metadata is retained as `sourceMeta`. `verify:sample` checks imported reference data against Excel; the revised consideration-pool ranks/percentiles are independently checked for every remaining record in the ranking tests.
 
 The dashboard is privately hosted at https://superr-selector-pressure-intelligence.mysticwarbler2.chatgpt.site for the owner's account.
 
@@ -81,7 +85,7 @@ The pipeline copies source master scores, source ranks, match counts, dates, ESS
 | `src/styles/index.css`, `tailwind.config.ts` | Responsive styles and token mapping                                                   |
 | `tests/`                                     | Source checks, isolated pipeline fixtures, interactions and accessibility             |
 
-`src/config/constants.ts` contains the page size (50), Top 10 count, limited-sample threshold (5), form threshold (±3), minimum form observations (8), verdict tie gap (strictly below 0.05), narrow/clear lead thresholds (1/3), half-life (183 days), labels and tooltips. Verdict wording is centralized in `src/domain/verdict.ts`; percentile and weighted-average rules are in `scripts/lib/derive.ts`.
+`src/config/constants.ts` contains the page size (50), Top 10 count, limited-sample threshold (5), form threshold (±3), minimum form observations (8), verdict tie gap (strictly below 0.05), narrow/clear lead thresholds (1/3), half-life (183 days), labels and tooltips. Verdict wording is centralized in `src/domain/verdict.ts`; source-data percentile and weighted-average rules are in `scripts/lib/derive.ts`, and consideration-pool ranking rules are in `src/domain/rankings.ts`.
 
 URL forms: `#/`, `#/player?role=batter&id=6281&m=B`, `#/compare?role=bowler&ids=…&m=C`. Home expansion/page state uses `bp` (batting) and `wp` (bowling). Page, method and comparison-selection changes replace the current history entry; profile role changes create a history entry. Browser Back restores the preceding URL and ranking expansion.
 

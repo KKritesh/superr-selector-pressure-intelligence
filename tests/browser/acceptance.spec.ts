@@ -3,9 +3,12 @@ import AxeBuilder from '@axe-core/playwright';
 import fs from 'node:fs';
 import type { Players } from '../../src/data/types';
 import { playersForConsideration } from '../../src/domain/eligibility';
+import { reviseRankings } from '../../src/domain/rankings';
 
-const players = playersForConsideration(
-  JSON.parse(fs.readFileSync('public/data/players.json', 'utf8')) as Players,
+const { players } = reviseRankings(
+  playersForConsideration(
+    JSON.parse(fs.readFileSync('public/data/players.json', 'utf8')) as Players,
+  ),
 );
 const batter = players.records.find((r) => r.role === 'batter' && r.methods.B.rank === 1)!;
 const bowlers = players.records

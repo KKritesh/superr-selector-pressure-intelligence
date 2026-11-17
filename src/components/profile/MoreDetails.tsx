@@ -50,6 +50,12 @@ export function MoreDetails({ record, method }: { record: RoleRecord; method: Me
             <dt>Rank under Option {other}</dt>
             <dd>{record.methods[other].rankDisplay}</dd>
           </div>
+          {record.sourceMethods && (
+            <div>
+              <dt>Original source rank</dt>
+              <dd>{record.sourceMethods[method].rankDisplay}</dd>
+            </div>
+          )}
           <div>
             <dt>Rank change under Option C</dt>
             <dd>
