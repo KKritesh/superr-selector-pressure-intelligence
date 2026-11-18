@@ -2479,3 +2479,39 @@ summary:focus-visible,
     line-height: 14px;
   }
 }
+
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  min-width: 44px;
+  min-height: 44px;
+  border: 1px solid currentColor;
+  border-radius: 8px;
+  flex-shrink: 0;
+  color: #e2e8f0;
+}
+.theme-toggle:hover {
+  background: rgb(255 255 255 / 10%);
+}
+:root[data-theme='dark'] .app-header {
+  background: #101c2e;
+  color: #edf3fc;
+}
+:root[data-theme='dark'] .desktop-nav a,
+:root[data-theme='dark'] .methodology-trigger,
+:root[data-theme='dark'] .brand small {
+  color: #cbd8ea;
+}
+:root[data-theme='dark'] .desktop-nav a.active,
+:root[data-theme='dark'] .desktop-nav a:hover {
+  background: #2c405c;
+  color: #fff;
+}
+:root[data-theme='dark'] .ball-mark path {
+  stroke: #fff;
+}
+@media (max-width: 1100px) {
+  .header-inner {
+    gap: 12px;
+  }
+}

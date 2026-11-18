@@ -1,3 +1,4 @@
+import { ThemeToggle } from './ThemeToggle';
 import { useState } from 'react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import { ChartNoAxesColumnIncreasing, UserRound, UsersRound, CircleHelp } from 'lucide-react';
@@ -50,6 +51,7 @@ export function AppLayout() {
               </NavLink>
             ))}
           </nav>
+          <ThemeToggle />
           <button className="methodology-trigger" onClick={() => setDrawer(true)}>
             <CircleHelp size={17} />
             <span>How scores work</span>

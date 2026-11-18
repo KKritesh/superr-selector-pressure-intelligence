@@ -6,6 +6,8 @@ import '@fontsource/inter/600.css';
 import '@fontsource/inter/700.css';
 import './styles/index.css';
 import App from './App';
+import { applyTheme, readTheme } from './components/layout/ThemeToggle';
+applyTheme(readTheme());
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <App />

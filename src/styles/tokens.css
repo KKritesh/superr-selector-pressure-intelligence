@@ -32,3 +32,26 @@
   --bat-tint: color-mix(in srgb, var(--bat-600) 7%, var(--surface));
   --bowl-tint: color-mix(in srgb, var(--bowl-600) 7%, var(--surface));
 }
+
+:root[data-theme='dark'] {
+  --ink-900: #edf3fc;
+  --ink-700: #d2deef;
+  --slate-500: #a8b8ce;
+  --line: #35465f;
+  --canvas: #0c1422;
+  --surface: #162235;
+  --bat-600: #80b0ff;
+  --bowl-600: #64d3bd;
+  --leader-bg: #3c3119;
+  --leader-fg: #ffe09b;
+  --leader-line: #b4944f;
+  --up: #70dda1;
+  --down: #ffc17a;
+  --steady: #b4c3d8;
+  --series-1: #70bfff;
+  --series-2: #ffd16a;
+  --series-3: #60ddb1;
+  --series-4: #e9a2d5;
+  --series-5: #ff9d78;
+  --shadow-card: 0 2px 12px rgb(0 0 0 / 24%);
+}
