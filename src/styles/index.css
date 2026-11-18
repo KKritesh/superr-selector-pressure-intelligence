@@ -2544,3 +2544,114 @@ summary:focus-visible,
     white-space: nowrap;
   }
 }
+
+.player-search {
+  padding-left: 48px;
+}
+.player-search > svg {
+  left: 62px;
+}
+.search-filter-toggle {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 42px;
+  height: 100%;
+  min-height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink-700);
+}
+.search-filter-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: min(400px, calc(100vw - 48px));
+  padding: 18px;
+  background: var(--surface);
+  color: var(--ink-700);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+}
+.search-filter-panel label {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+.search-filter-panel select {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  color: var(--ink-700);
+  background: var(--canvas);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+.search-filter-panel fieldset {
+  border: 0;
+  padding: 0;
+  min-width: 0;
+}
+.search-filter-panel legend {
+  font-size: 13px;
+}
+.search-filter-panel small {
+  display: block;
+  color: var(--slate-500);
+  margin-bottom: 12px;
+}
+.match-range {
+  position: relative;
+  height: 44px;
+}
+.player-search .match-range input {
+  position: absolute;
+  width: 100%;
+  min-height: 0;
+  height: 8px;
+  top: 18px;
+  padding: 0;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  pointer-events: none;
+}
+.match-range::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  height: 4px;
+  background: var(--line);
+  left: 0;
+  right: 0;
+  border-radius: 4px;
+}
+.match-range input::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--bat-600);
+  pointer-events: auto;
+  cursor: ew-resize;
+}
+.match-range input::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--bat-600);
+  pointer-events: auto;
+  cursor: ew-resize;
+}
+.search-filter-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}

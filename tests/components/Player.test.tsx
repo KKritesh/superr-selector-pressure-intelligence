@@ -94,6 +94,55 @@ describe('profile and search interactions', () => {
     fireEvent.keyDown(input, { key: 'Escape' });
     expect(input).toHaveAttribute('aria-expanded', 'false');
   });
+  it('browses all eligible players on empty Enter and combines role, nationality and match-range filters', async () => {
+    setup('/');
+    const onSelect = vi.fn();
+    render(
+      <HashRouter>
+        <DataProvider>
+          <PlayerSearch onSelect={onSelect} />
+        </DataProvider>
+      </HashRouter>,
+    );
+    const input = await screen.findByRole('combobox');
+    fireEvent.keyDown(input, { key: 'Enter' });
+    expect(screen.getAllByRole('option').length).toBeGreaterThan(8);
+    fireEvent.click(screen.getByRole('button', { name: 'Search filters' }));
+    fireEvent.change(screen.getByLabelText('Filter by role'), { target: { value: 'bowler' } });
+    fireEvent.change(screen.getByLabelText('Filter by nationality'), {
+      target: { value: 'India' },
+    });
+    fireEvent.change(screen.getByLabelText('Minimum matches played'), { target: { value: '20' } });
+    fireEvent.change(screen.getByLabelText('Maximum matches played'), { target: { value: '100' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Show players' }));
+    const indianIds = new Set(
+      players.identities
+        .filter((p: { nationality: string }) => p.nationality === 'India')
+        .map((p: { playerId: number }) => p.playerId),
+    );
+    const expected = players.records.filter(
+      (r: {
+        role: string;
+        playerId: number;
+        matches: number;
+        methods: { B: { master: number | null } };
+      }) =>
+        r.role === 'bowler' &&
+        indianIds.has(r.playerId) &&
+        r.matches >= 20 &&
+        r.matches <= 100 &&
+        r.methods.B.master !== null,
+    );
+    expect(screen.getAllByRole('option')).toHaveLength(expected.length);
+    fireEvent.keyDown(input, { key: 'ArrowDown' });
+    fireEvent.keyDown(input, { key: 'Enter' });
+    expect(onSelect).toHaveBeenCalledWith(expect.any(Number), 'bowler');
+    expect(
+      expected.some((r: { playerId: number }) => r.playerId === onSelect.mock.calls[0][0]),
+    ).toBe(true);
+    fireEvent.change(input, { target: { value: 'Rashid Khan' } });
+    expect(screen.queryAllByRole('option')).toHaveLength(0);
+  });
   it('disables an unavailable role and hides the dual-role panel for a single-role player', async () => {
     setup('/player?role=batter&id=50284&m=B');
     render(

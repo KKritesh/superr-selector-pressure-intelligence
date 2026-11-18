@@ -6,7 +6,13 @@ import { reviseRankings } from '../domain/rankings';
 import { loadCore } from './loader';
 import { ErrorPanel, Skeleton } from '../components/common/States';
 function indexData(sourceMeta: Meta, sourcePlayers: Players) {
-  const { players, population } = reviseRankings(playersForConsideration(sourcePlayers));
+  const displayPlayers = {
+    ...sourcePlayers,
+    identities: sourcePlayers.identities.map((p) =>
+      p.playerId === 953 ? { ...p, name: 'KL Rahul' } : p,
+    ),
+  };
+  const { players, population } = reviseRankings(playersForConsideration(displayPlayers));
   const meta = { ...sourceMeta, population };
   const identities = new Map(players.identities.map((p) => [p.playerId, p]));
   const records = new Map(players.records.map((r) => [`${r.role}:${r.playerId}`, r]));
