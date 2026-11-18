@@ -30,7 +30,7 @@ describe('rankings with real imported data', () => {
     );
   });
   afterEach(() => vi.unstubAllGlobals());
-  it('renders the top ten in each role and preserves independent paging through method changes', async () => {
+  it('renders fifty players in each role and preserves independent paging through method changes', async () => {
     render(
       <HashRouter>
         <DataProvider>
@@ -40,15 +40,15 @@ describe('rankings with real imported data', () => {
     );
     const batting = await screen.findByRole('table', { name: 'Batting pressure rankings' }),
       bowling = screen.getByRole('table', { name: 'Bowling pressure rankings' });
-    expect(within(batting).getAllByRole('row')).toHaveLength(11);
-    expect(within(bowling).getAllByRole('row')).toHaveLength(11);
+    expect(within(batting).getAllByRole('row')).toHaveLength(51);
+    expect(within(bowling).getAllByRole('row')).toHaveLength(51);
     expect(within(batting).getAllByRole('row')[1]).toHaveTextContent('Abhishek Sharma');
     expect(within(bowling).getAllByRole('row')[1]).toHaveTextContent('Rashid Khan');
-    fireEvent.click(screen.getByRole('button', { name: 'See more batters' }));
     expect(within(batting).getAllByRole('row')).toHaveLength(51);
-    expect(within(bowling).getAllByRole('row')).toHaveLength(11);
-    fireEvent.click(screen.getByRole('button', { name: 'Page 2' }));
-    fireEvent.click(screen.getByRole('button', { name: 'Page 3' }));
+    expect(within(bowling).getAllByRole('row')).toHaveLength(51);
+    const batRegion = screen.getByRole('region', { name: 'Top Batters Under Pressure' });
+    fireEvent.click(within(batRegion).getByRole('button', { name: 'Page 2' }));
+    fireEvent.click(within(batRegion).getByRole('button', { name: 'Page 3' }));
     expect(window.location.hash).toContain('bp=3');
     vi.stubGlobal('scrollY', 640);
     const restoreScroll = vi.fn();
@@ -62,21 +62,19 @@ describe('rankings with real imported data', () => {
       (p: { playerId: number }) => p.playerId === rank101.playerId,
     ).name;
     expect(within(batting).getAllByRole('row')[1]).toHaveTextContent(name);
-    expect(within(bowling).getAllByRole('row')).toHaveLength(11);
-    fireEvent.click(screen.getByRole('button', { name: 'See more bowlers' }));
+    expect(within(bowling).getAllByRole('row')).toHaveLength(51);
     const bowlRegion = screen.getByRole('region', { name: 'Top Bowlers Under Pressure' });
     fireEvent.click(within(bowlRegion).getByRole('button', { name: 'Page 2' }));
     expect(window.location.hash).toContain('bp=3');
     expect(window.location.hash).toContain('wp=2');
-    const batRegion = screen.getByRole('region', { name: 'Top Batters Under Pressure' });
     const lastPage = Math.ceil(consideredBatters.length / 50);
     fireEvent.click(within(batRegion).getByRole('button', { name: `Page ${lastPage}` }));
     expect(within(batting).getAllByRole('row')).toHaveLength(
       consideredBatters.length - (lastPage - 1) * 50 + 1,
     );
     expect(within(batRegion).getByRole('button', { name: 'Next page' })).toBeDisabled();
-    fireEvent.click(within(batRegion).getByRole('button', { name: 'Show top 10' }));
-    expect(within(batting).getAllByRole('row')).toHaveLength(11);
+    fireEvent.click(within(batRegion).getByRole('button', { name: 'Page 1' }));
+    expect(within(batting).getAllByRole('row')).toHaveLength(51);
     expect(within(bowling).getAllByRole('row')).toHaveLength(51);
     expect(window.location.hash).toContain('wp=2');
   });

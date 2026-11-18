@@ -1,17 +1,11 @@
-import { useRef } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { ArrowDown, ArrowUp, Crosshair, Activity } from 'lucide-react';
+import { Crosshair, Activity } from 'lucide-react';
 import { useData } from '../../data/DataProvider';
 import { useMethod, playerURL } from '../../routes';
 import type { Role, RankedPlayer, Method } from '../../data/types';
 import { displayName, formatScore, formatCount } from '../../domain/format';
-import {
-  PAGE_SIZE,
-  TOP_N,
-  LIMITED_SAMPLE_MATCHES,
-  METHOD_NAMES,
-  TOOLTIPS,
-} from '../../config/constants';
+import { PAGE_SIZE, LIMITED_SAMPLE_MATCHES, METHOD_NAMES, TOOLTIPS } from '../../config/constants';
 import { Pagination } from './Pagination';
 import { InfoTooltip } from '../common/InfoTooltip';
 function LeaderboardRow({ player, method }: { player: RankedPlayer; method: Method }) {
@@ -69,18 +63,31 @@ export function Leaderboard({ role }: { role: Role }) {
     ref = useRef<HTMLDivElement>(null);
   const key = role === 'batter' ? 'bp' : 'wp',
     items = ranked[method][role],
-    expanded = params.has(key),
     pages = Math.max(1, Math.ceil(items.length / PAGE_SIZE));
   const page = Math.min(pages, Math.max(1, Number(params.get(key)) || 1));
-  const visible = expanded
-    ? items.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
-    : items.slice(0, TOP_N);
-  const update = (p: number | null, scroll = false) => {
+  const visible = items.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+  useLayoutEffect(() => {
+    const container = ref.current;
+    if (!container) return;
+    const rows = Array.from(container.querySelectorAll('tbody tr')).slice(0, 10);
+    const header = container.querySelector('thead');
+    const measure = () => {
+      const height =
+        (header?.getBoundingClientRect().height ?? 0) +
+        rows.reduce((sum, row) => sum + row.getBoundingClientRect().height, 0);
+      if (height > 0) container.style.height = `${Math.ceil(height) + 2}px`;
+    };
+    measure();
+    if (typeof ResizeObserver === 'undefined') return;
+    const observer = new ResizeObserver(measure);
+    for (const element of [...rows, ...(header ? [header] : [])]) observer.observe(element);
+    return () => observer.disconnect();
+  }, [items, page, method]);
+  const update = (p: number) => {
     const next = new URLSearchParams(params);
-    if (p === null) next.delete(key);
-    else next.set(key, String(p));
+    next.set(key, String(p));
     setParams(next, { replace: true });
-    if (scroll) ref.current?.scrollTo?.({ top: 0, behavior: 'instant' });
+    ref.current?.scrollTo?.({ top: 0, behavior: 'instant' });
   };
   const Icon = role === 'batter' ? Crosshair : Activity;
   return (
@@ -99,7 +106,13 @@ export function Leaderboard({ role }: { role: Role }) {
           </p>
         </div>
       </header>
-      <div className={`leaderboard-scroll ${expanded ? 'expanded' : ''}`} ref={ref}>
+      <div
+        className="leaderboard-scroll"
+        ref={ref}
+        tabIndex={0}
+        role="region"
+        aria-label={`${role === 'batter' ? 'Batting' : 'Bowling'} players, scroll for more`}
+      >
         <table aria-label={`${role === 'batter' ? 'Batting' : 'Bowling'} pressure rankings`}>
           <thead>
             <tr>
@@ -121,22 +134,11 @@ export function Leaderboard({ role }: { role: Role }) {
         </table>
       </div>
       <footer className="leaderboard-footer">
-        {expanded ? (
-          <>
-            <span>
-              Showing {(page - 1) * PAGE_SIZE + 1}–{Math.min(page * PAGE_SIZE, items.length)} of{' '}
-              {formatCount(items.length)}
-            </span>
-            <Pagination page={page} total={pages} onChange={(p) => update(p, true)} />
-            <button className="text-button" onClick={() => update(null)}>
-              Show top 10 <ArrowUp size={15} />
-            </button>
-          </>
-        ) : (
-          <button className="see-more" onClick={() => update(1)}>
-            See more {role === 'batter' ? 'batters' : 'bowlers'} <ArrowDown size={16} />
-          </button>
-        )}
+        <span>
+          Showing {items.length ? (page - 1) * PAGE_SIZE + 1 : 0}–
+          {Math.min(page * PAGE_SIZE, items.length)} of {formatCount(items.length)}
+        </span>
+        <Pagination page={page} total={pages} onChange={update} />
       </footer>
     </section>
   );

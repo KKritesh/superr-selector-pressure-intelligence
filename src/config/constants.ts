@@ -1,5 +1,4 @@
 export const PAGE_SIZE = 50;
-export const TOP_N = 10;
 export const LIMITED_SAMPLE_MATCHES = 5;
 export const TIE_EPS = 0.05;
 export const SCORE_TIE_EPS = 1e-9;

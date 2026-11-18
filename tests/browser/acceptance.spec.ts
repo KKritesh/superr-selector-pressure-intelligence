@@ -64,14 +64,14 @@ test('responsive layouts and full browser axe scan on each screen', async ({ pag
 
 test('independent pagination survives method and Back navigation', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('button', { name: 'See more batters' }).click();
-  await page.getByRole('button', { name: 'Page 2', exact: true }).click();
-  await page.getByRole('button', { name: 'Page 3', exact: true }).click();
+  const batting = page.getByRole('region', { name: 'Top Batters Under Pressure' });
+  await batting.getByRole('button', { name: 'Page 2', exact: true }).click();
+  await batting.getByRole('button', { name: 'Page 3', exact: true }).click();
   await page.getByRole('radio', { name: 'Consistent Performers' }).click();
   await expect(page).toHaveURL(/bp=3/);
   await expect(
     page.getByRole('table', { name: 'Bowling pressure rankings' }).getByRole('row'),
-  ).toHaveCount(11);
+  ).toHaveCount(51);
   await page
     .getByRole('table', { name: 'Batting pressure rankings' })
     .getByRole('link')

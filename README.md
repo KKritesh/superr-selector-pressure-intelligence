@@ -25,7 +25,7 @@ Use a local server; opening `dist/index.html` directly with `file://` will not l
 
 ## What is implemented
 
-- Independent batting and bowling Top 10 lists, expandable to 50 rows per page, with independent pagination.
+- Independent batting and bowling lists with numbered pagination, 50 players per page, and a scroll area sized to the first 10 players.
 - Global Recent Performers / Consistent Performers selection, carried in the URL using the unchanged B/C method codes.
 - Accessible name/ID search, duplicate-name disambiguation, role chips, arrow-key navigation and keyboard role selection.
 - Profiles with Master Pressure Score, consideration-pool rank/percentile, matches, Realtime Performance, Individual Player Score, recent/all-match trends, form indicator, dual-role views and source-row details.
@@ -85,7 +85,7 @@ The pipeline copies source master scores, source ranks, match counts, dates, ESS
 | `src/styles/index.css`, `tailwind.config.ts` | Responsive styles and token mapping                                                   |
 | `tests/`                                     | Source checks, isolated pipeline fixtures, interactions and accessibility             |
 
-`src/config/constants.ts` contains the page size (50), Top 10 count, limited-sample threshold (5), form threshold (±3), minimum form observations (8), verdict tie gap (strictly below 0.05), narrow/clear lead thresholds (1/3), half-life (183 days), labels and tooltips. Verdict wording is centralized in `src/domain/verdict.ts`; source-data percentile and weighted-average rules are in `scripts/lib/derive.ts`, and consideration-pool ranking rules are in `src/domain/rankings.ts`.
+`src/config/constants.ts` contains the page size (50), limited-sample threshold (5), form threshold (±3), minimum form observations (8), verdict tie gap (strictly below 0.05), narrow/clear lead thresholds (1/3), half-life (183 days), labels and tooltips. Verdict wording is centralized in `src/domain/verdict.ts`; source-data percentile and weighted-average rules are in `scripts/lib/derive.ts`, and consideration-pool ranking rules are in `src/domain/rankings.ts`.
 
 URL forms: `#/`, `#/player?role=batter&id=6281&m=B`, `#/compare?role=bowler&ids=…&m=C`. Home expansion/page state uses `bp` (batting) and `wp` (bowling). Page, method and comparison-selection changes replace the current history entry; profile role changes create a history entry. Browser Back restores the preceding URL and ranking expansion.
 

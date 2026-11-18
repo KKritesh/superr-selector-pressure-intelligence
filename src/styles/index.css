@@ -502,9 +502,7 @@ summary:focus-visible,
 }
 .leaderboard-scroll {
   border-block: 1px solid var(--line);
-}
-.leaderboard-scroll.expanded {
-  max-height: 70vh;
+  height: 588px;
   overflow: auto;
   scrollbar-gutter: stable;
 }
