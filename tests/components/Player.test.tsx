@@ -84,8 +84,7 @@ describe('profile and search interactions', () => {
     const input = await screen.findByRole('combobox');
     fireEvent.change(input, { target: { value: 'Basil Hameed' } });
     expect(screen.getAllByRole('option')).toHaveLength(2);
-    expect(screen.getByText(/ID 8638/)).toBeInTheDocument();
-    expect(screen.getByText(/ID 39444/)).toBeInTheDocument();
+    expect(screen.getAllByText('Basil Hameed')).toHaveLength(2);
     fireEvent.keyDown(input, { key: 'ArrowDown' });
     fireEvent.keyDown(input, { key: 'Enter' });
     expect(onSelect).toHaveBeenCalledTimes(1);

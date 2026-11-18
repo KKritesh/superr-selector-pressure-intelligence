@@ -19,9 +19,7 @@ export function formatDate(s: string | null, short = false): string {
 export const roleLabel = (r: Role): string => (r === 'batter' ? 'Batter' : 'Bowler');
 export const rolePlural = (r: Role): string => (r === 'batter' ? 'batters' : 'bowlers');
 export function displayName(p: Identity): string {
-  return p.hasNameCollision
-    ? `${p.name} · ${p.nationality ?? 'Country unavailable'} · ID ${p.playerId}`
-    : p.name;
+  return p.name;
 }
 export const normalize = (s: string): string =>
   s

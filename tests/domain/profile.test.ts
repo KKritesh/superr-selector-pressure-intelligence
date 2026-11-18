@@ -28,7 +28,7 @@ describe('form and observation integrity', () => {
     );
     expect(formIndicator(observations(Array(10).fill(20)))!.text).toBe('Steady ▬');
   });
-  it('renders zero and null separately and always disambiguates colliding IDs', () => {
+  it('renders zero and null separately and displays only the name for colliding IDs', () => {
     expect(formatScore(0)).toBe('0.0');
     expect(formatScore(null)).toBe('—');
     expect(
@@ -41,6 +41,6 @@ describe('form and observation integrity', () => {
         hasNameCollision: true,
         roles: ['batter'],
       }),
-    ).toContain('ID 8638');
+    ).toBe('Basil Hameed');
   });
 });
