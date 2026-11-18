@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
 import { useData } from '../../data/DataProvider';
 import { formatDate } from '../../domain/format';
-import { TOOLTIPS } from '../../config/constants';
+import { METHOD_NAMES, TOOLTIPS } from '../../config/constants';
 export function MethodologyDrawer({ onClose }: { onClose: () => void }) {
   const { meta } = useData(),
     ref = useRef<HTMLDivElement>(null);
@@ -69,10 +69,10 @@ export function MethodologyDrawer({ onClose }: { onClose: () => void }) {
           </section>
           <section>
             <h3>Two ways to view the same evidence</h3>
-            <h4>Option B — Bayesian</h4>
-            <p>{TOOLTIPS.B.replace('Option B — Bayesian: ', '')}</p>
-            <h4>Option C — Consistency Adjusted</h4>
-            <p>{TOOLTIPS.C.replace('Option C — Consistency Adjusted: ', '')}</p>
+            <h4>{METHOD_NAMES.B}</h4>
+            <p>{TOOLTIPS.B.replace(`${METHOD_NAMES.B}: `, '')}</p>
+            <h4>{METHOD_NAMES.C}</h4>
+            <p>{TOOLTIPS.C.replace(`${METHOD_NAMES.C}: `, '')}</p>
           </section>
           <section>
             <h3>Realtime & Individual</h3>
@@ -135,10 +135,10 @@ export function MethodologyDrawer({ onClose }: { onClose: () => void }) {
               Form. Match-level Final Pressure Score = 0.65R + 0.35I.
             </p>
             <p>
-              Option B balances the recency-weighted average with the role benchmark: (Σw × average
-              + k × benchmark) / (Σw + k). Option C subtracts λ × weighted standard deviation /
-              √(effective sample size). These describe the supplied framework; this app displays its
-              precomputed outputs.
+              {METHOD_NAMES.B} balances the recency-weighted average with the role benchmark: (Σw ×
+              average + k × benchmark) / (Σw + k). {METHOD_NAMES.C} subtracts λ × weighted standard
+              deviation / √(effective sample size). These describe the supplied framework; this app
+              displays its precomputed outputs.
             </p>
           </details>
         </div>

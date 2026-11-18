@@ -52,9 +52,9 @@ describe('comparison interactions with actual scores', () => {
       name: 'Pressure performance comparison for 3 batters',
     });
     expect(within(table).getAllByRole('row')).toHaveLength(7);
-    fireEvent.click(screen.getByRole('radio', { name: 'Option C — Consistency Adjusted' }));
+    fireEvent.click(screen.getByRole('radio', { name: 'Consistent Performers' }));
     expect(verdict).toHaveTextContent('(40.7)');
-    expect(verdict).toHaveTextContent('Option C — Consistency Adjusted');
+    expect(verdict).toHaveTextContent('Consistent Performers');
     fireEvent.click(screen.getByRole('button', { name: 'Remove Ishan Kishan' }));
     expect(
       screen.getByRole('table', { name: 'Pressure performance comparison for 2 batters' }),

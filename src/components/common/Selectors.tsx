@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { useMethod } from '../../routes';
 import type { Role } from '../../data/types';
-import { TOOLTIPS } from '../../config/constants';
+import { METHOD_NAMES, TOOLTIPS } from '../../config/constants';
 export function Segmented<T extends string>({
   label,
   value,
@@ -74,8 +74,8 @@ export function MethodSelector() {
       onChange={setMethod}
       className="method-selector"
       options={[
-        { value: 'B', label: 'Option B — Bayesian', title: TOOLTIPS.B },
-        { value: 'C', label: 'Option C — Consistency Adjusted', title: TOOLTIPS.C },
+        { value: 'B', label: METHOD_NAMES.B, title: TOOLTIPS.B },
+        { value: 'C', label: METHOD_NAMES.C, title: TOOLTIPS.C },
       ]}
     />
   );

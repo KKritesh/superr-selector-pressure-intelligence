@@ -52,7 +52,7 @@ describe('rankings with real imported data', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Page 2' }));
     fireEvent.click(screen.getByRole('button', { name: 'Page 3' }));
     expect(window.location.hash).toContain('bp=3');
-    fireEvent.click(screen.getByRole('radio', { name: 'Option C — Consistency Adjusted' }));
+    fireEvent.click(screen.getByRole('radio', { name: 'Consistent Performers' }));
     expect(window.location.hash).toContain('m=C');
     expect(window.location.hash).toContain('bp=3');
     const rank101 = [...consideredBatters].sort((a, b) => a.methods.C.rank - b.methods.C.rank)[100];

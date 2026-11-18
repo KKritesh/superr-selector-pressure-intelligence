@@ -56,7 +56,7 @@ describe('profile and search interactions', () => {
     expect(table).toHaveTextContent(batter['6281'].at(-1).final.toFixed(1));
     fireEvent.click(screen.getByText('More Details'));
     expect(screen.getByText(/Excel row 2/)).toBeInTheDocument();
-    fireEvent.click(screen.getByRole('radio', { name: 'Option C — Consistency Adjusted' }));
+    fireEvent.click(screen.getByRole('radio', { name: 'Consistent Performers' }));
     expect(screen.getAllByText('40.7')[0]).toBeInTheDocument();
     expect(screen.getByText('Consistency penalty')).toBeInTheDocument();
     fireEvent.click(screen.getByRole('radio', { name: 'Bowler' }));

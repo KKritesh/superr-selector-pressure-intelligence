@@ -26,7 +26,7 @@ Use a local server; opening `dist/index.html` directly with `file://` will not l
 ## What is implemented
 
 - Independent batting and bowling Top 10 lists, expandable to 50 rows per page, with independent pagination.
-- Global Option B / Option C selection, carried in the URL.
+- Global Recent Performers / Consistent Performers selection, carried in the URL using the unchanged B/C method codes.
 - Accessible name/ID search, duplicate-name disambiguation, role chips, arrow-key navigation and keyboard role selection.
 - Profiles with Master Pressure Score, consideration-pool rank/percentile, matches, Realtime Performance, Individual Player Score, recent/all-match trends, form indicator, dual-role views and source-row details.
 - Comparison of 2–5 eligible players, removable selections, role-change notices, six metric rows, displayed-precision leader badges, separate sample-size tags, multi-series trends and deterministic verdicts.
@@ -39,7 +39,7 @@ Players whose source nationality is `Pakistan` are excluded before dashboard loo
 
 The nationality filter and `MIN_ROLE_MATCHES = 10` are configured in `src/config/constants.ts` and applied by `src/domain/eligibility.ts` in `DataProvider`. A batting or bowling record is retained only when its own Matches Analysed is at least 10; missing counts are excluded. This uses the actual analysed-match count, not effective sample size. Exactly 10 qualifies. Player role metadata is rebuilt from qualifying records, and identities with no qualifying role are removed from the dashboard. A player with one qualifying role remains available in that role only. `src/domain/rankings.ts` then recalculates displayed ranks, rank labels, percentiles and Option B/C rank differences separately for each remaining role/method pool. Rank positions follow descending unchanged pressure scores; ties use competition ranks and share percentiles. Missing scores are unranked. Percentiles use the same strictly-lower, half-up convention with the remaining scored population as denominator.
 
-All dashboard views use these revised rankings and pool sizes, including search role badges, profiles, dual-role panels and comparisons. With both the Pakistan exclusion and the 10-match role minimum, the current pool contains 318 batters and 247 bowlers across 412 players; 153 retain both roles. Ishan Kishan, for example, retains batting (122 matches) but not bowling (1 match). For example, Jasprit Bumrah is now #2 under Option B bowling rather than the original #4.
+All dashboard views use these revised rankings and pool sizes, including search role badges, profiles, dual-role panels and comparisons. With both the Pakistan exclusion and the 10-match role minimum, the current pool contains 318 batters and 247 bowlers across 412 players; 153 retain both roles. Ishan Kishan, for example, retains batting (122 matches) but not bowling (1 match). For example, Jasprit Bumrah is now #2 under Recent Performers bowling rather than the original #4.
 
 Original Excel workbooks, generated reference JSON, master scores, supporting metrics, penalties, weights and scoring benchmarks remain intact. Original ranking values are kept on derived records as `sourceMethods`, and the original selected-method rank appears in More Details. Original metadata is retained as `sourceMeta`. `verify:sample` checks imported reference data against Excel; the revised consideration-pool ranks/percentiles are independently checked for every remaining record in the ranking tests.
 

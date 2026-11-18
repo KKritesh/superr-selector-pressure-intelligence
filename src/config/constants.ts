@@ -13,16 +13,16 @@ export const EXCLUDED_NATIONALITIES = ['Pakistan'] as const;
 export const MIN_ROLE_MATCHES = 10;
 export const CONSIDERATION_NOTE = `Pakistan excluded; each role requires at least ${MIN_ROLE_MATCHES} analysed matches. Ranks and percentiles use eligible role performances.`;
 export const METHOD_NAMES = {
-  B: 'Option B — Bayesian',
-  C: 'Option C — Consistency Adjusted',
+  B: 'Recent Performers',
+  C: 'Consistent Performers',
 } as const;
 export const VERDICT_DISCLAIMER =
   'Comparison reflects pressure-performance indicators, not auction valuation, squad fit, or player availability.';
 export const DUAL_FOOTNOTE =
   'Batting and bowling scores are measured separately and are not interchangeable. No combined all-rounder score is calculated.';
 export const TOOLTIPS = {
-  B: 'Option B — Bayesian: recent pressure performance, balanced so players with few matches are not over- or under-rated. Best for a steady, fair view.',
-  C: 'Option C — Consistency Adjusted: starts from Option B and lowers the score of players whose results swing widely from match to match.',
+  B: `${METHOD_NAMES.B}: recent pressure performance, balanced so players with few matches are not over- or under-rated. Best for a steady, fair view.`,
+  C: `${METHOD_NAMES.C}: starts from ${METHOD_NAMES.B} and lowers the score of players whose results swing widely from match to match.`,
   master:
     'Overall rating out of 100 for how well this player performs when the match is tough. Higher is better.',
   rank: `Position and percentile among eligible players in this role. At least ${MIN_ROLE_MATCHES} analysed matches are required.`,

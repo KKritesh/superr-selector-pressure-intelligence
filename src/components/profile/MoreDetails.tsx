@@ -1,6 +1,6 @@
 import type { RoleRecord, Method } from '../../data/types';
 import { formatDate, formatScore } from '../../domain/format';
-import { TOOLTIPS } from '../../config/constants';
+import { METHOD_NAMES, TOOLTIPS } from '../../config/constants';
 import { InfoTooltip } from '../common/InfoTooltip';
 import { Value } from './Metrics';
 export function MoreDetails({ record, method }: { record: RoleRecord; method: Method }) {
@@ -41,13 +41,15 @@ export function MoreDetails({ record, method }: { record: RoleRecord; method: Me
             </dd>
           </div>
           <div>
-            <dt>Option C − Option B score</dt>
+            <dt>
+              {METHOD_NAMES.C} − {METHOD_NAMES.B} score
+            </dt>
             <dd>
               {difference === null ? '—' : `${difference > 0 ? '+' : ''}${formatScore(difference)}`}
             </dd>
           </div>
           <div>
-            <dt>Rank under Option {other}</dt>
+            <dt>Rank under {METHOD_NAMES[other]}</dt>
             <dd>{record.methods[other].rankDisplay}</dd>
           </div>
           {record.sourceMethods && (
@@ -57,13 +59,13 @@ export function MoreDetails({ record, method }: { record: RoleRecord; method: Me
             </div>
           )}
           <div>
-            <dt>Rank change under Option C</dt>
+            <dt>Rank change under {METHOD_NAMES.C}</dt>
             <dd>
               {rankDiff === null || rankDiff === undefined
                 ? '—'
                 : rankDiff === 0
                   ? 'Same rank'
-                  : `${rankDiff > 0 ? '▲' : '▼'} ${Math.abs(rankDiff)} places ${rankDiff > 0 ? 'higher' : 'lower'} than Option B`}
+                  : `${rankDiff > 0 ? '▲' : '▼'} ${Math.abs(rankDiff)} places ${rankDiff > 0 ? 'higher' : 'lower'} than ${METHOD_NAMES.B}`}
             </dd>
           </div>
           {method === 'C' && (

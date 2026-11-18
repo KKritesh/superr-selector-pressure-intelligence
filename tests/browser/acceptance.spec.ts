@@ -32,8 +32,8 @@ test('two-minute path: ranking, bowler profile, then three-bowler comparison', a
   await page.goto(`/#/compare?role=bowler&ids=${bowlers.map((r) => r.playerId).join(',')}&m=B`);
   const verdict = page.getByRole('region', { name: 'Comparison Verdict' });
   await expect(verdict).toContainText(topBowler.name);
-  await page.getByRole('radio', { name: 'Option C — Consistency Adjusted' }).click();
-  await expect(verdict).toContainText('(Option C — Consistency Adjusted)');
+  await page.getByRole('radio', { name: 'Consistent Performers' }).click();
+  await expect(verdict).toContainText('(Consistent Performers)');
   await expect(
     page.getByRole('img', { name: /Pressure score by actual match date/ }),
   ).toBeVisible();
@@ -67,7 +67,7 @@ test('independent pagination survives method and Back navigation', async ({ page
   await page.getByRole('button', { name: 'See more batters' }).click();
   await page.getByRole('button', { name: 'Page 2', exact: true }).click();
   await page.getByRole('button', { name: 'Page 3', exact: true }).click();
-  await page.getByRole('radio', { name: 'Option C — Consistency Adjusted' }).click();
+  await page.getByRole('radio', { name: 'Consistent Performers' }).click();
   await expect(page).toHaveURL(/bp=3/);
   await expect(
     page.getByRole('table', { name: 'Bowling pressure rankings' }).getByRole('row'),

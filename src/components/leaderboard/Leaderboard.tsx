@@ -5,7 +5,13 @@ import { useData } from '../../data/DataProvider';
 import { useMethod, playerURL } from '../../routes';
 import type { Role, RankedPlayer, Method } from '../../data/types';
 import { displayName, formatScore, formatCount } from '../../domain/format';
-import { PAGE_SIZE, TOP_N, LIMITED_SAMPLE_MATCHES, TOOLTIPS } from '../../config/constants';
+import {
+  PAGE_SIZE,
+  TOP_N,
+  LIMITED_SAMPLE_MATCHES,
+  METHOD_NAMES,
+  TOOLTIPS,
+} from '../../config/constants';
 import { Pagination } from './Pagination';
 import { InfoTooltip } from '../common/InfoTooltip';
 function LeaderboardRow({ player, method }: { player: RankedPlayer; method: Method }) {
@@ -89,7 +95,7 @@ export function Leaderboard({ role }: { role: Role }) {
           </h2>
           <p>
             {formatCount(items.length)} {role === 'batter' ? 'batters' : 'bowlers'} ranked ·{' '}
-            {method === 'B' ? 'Bayesian' : 'Consistency Adjusted'}
+            {METHOD_NAMES[method]}
           </p>
         </div>
       </header>

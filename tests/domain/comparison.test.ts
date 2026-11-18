@@ -73,7 +73,7 @@ describe('deterministic comparison verdict', () => {
     expect(v.detail).toContain(
       'Based on 12 matches (effective sample 8.0) versus 20 matches (effective sample 10.0) for Player 2.',
     );
-    expect(v.methodNote).toBe('(Option B — Bayesian)');
+    expect(v.methodNote).toBe('(Recent Performers)');
     expect(JSON.stringify(inputs)).toBe(before);
     expect(comparisonVerdict(inputs, 'B')).toEqual(v);
   });
@@ -88,7 +88,7 @@ describe('deterministic comparison verdict', () => {
     expect(v.headline).toContain(
       'a clear lead; followed by Player 3 (28.0), Player 4 (23.0), Player 5 (18.0)',
     );
-    expect(v.methodNote).toContain('Option C');
+    expect(v.methodNote).toContain('Consistent Performers');
   });
   it('treats gaps below 0.05 as a tie, including multiple co-leaders', () => {
     const v = comparisonVerdict([player(1, 40), player(2, 39.96), player(3, 39.97)], 'B')!;
