@@ -5,7 +5,6 @@ import { vi } from 'vitest';
 import { DataProvider } from '../../src/data/DataProvider';
 import PlayerPage from '../../src/pages/PlayerPage';
 import { PlayerSearch } from '../../src/components/common/PlayerSearch';
-import { MethodSelector } from '../../src/components/common/Selectors';
 const meta = JSON.parse(fs.readFileSync('public/data/meta.json', 'utf8'));
 const players = JSON.parse(fs.readFileSync('public/data/players.json', 'utf8'));
 const batter = JSON.parse(fs.readFileSync('public/data/history.batter.json', 'utf8'));
@@ -41,7 +40,6 @@ describe('profile and search interactions', () => {
     render(
       <HashRouter>
         <DataProvider>
-          <MethodSelector />
           <PlayerPage />
         </DataProvider>
       </HashRouter>,
@@ -56,7 +54,11 @@ describe('profile and search interactions', () => {
     expect(table).toHaveTextContent(batter['6281'].at(-1).final.toFixed(1));
     fireEvent.click(screen.getByText('More Details'));
     expect(screen.getByText(/Excel row 2/)).toBeInTheDocument();
+    vi.stubGlobal('scrollY', 480);
+    const restoreScroll = vi.fn();
+    vi.stubGlobal('scrollTo', restoreScroll);
     fireEvent.click(screen.getByRole('radio', { name: 'Consistent Performers' }));
+    expect(restoreScroll).toHaveBeenCalledWith({ left: 0, top: 480, behavior: 'instant' });
     expect(screen.getAllByText('40.7')[0]).toBeInTheDocument();
     expect(screen.getByText('Consistency penalty')).toBeInTheDocument();
     fireEvent.click(screen.getByRole('radio', { name: 'Bowler' }));

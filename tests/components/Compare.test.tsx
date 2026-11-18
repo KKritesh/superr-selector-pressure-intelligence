@@ -4,7 +4,6 @@ import { HashRouter } from 'react-router-dom';
 import { vi } from 'vitest';
 import { DataProvider } from '../../src/data/DataProvider';
 import ComparePage from '../../src/pages/ComparePage';
-import { MethodSelector } from '../../src/components/common/Selectors';
 const meta = JSON.parse(fs.readFileSync('public/data/meta.json', 'utf8')),
   players = JSON.parse(fs.readFileSync('public/data/players.json', 'utf8'));
 const batter = JSON.parse(fs.readFileSync('public/data/history.batter.json', 'utf8')),
@@ -40,7 +39,6 @@ describe('comparison interactions with actual scores', () => {
     render(
       <HashRouter>
         <DataProvider>
-          <MethodSelector />
           <ComparePage />
         </DataProvider>
       </HashRouter>,
@@ -52,7 +50,11 @@ describe('comparison interactions with actual scores', () => {
       name: 'Pressure performance comparison for 3 batters',
     });
     expect(within(table).getAllByRole('row')).toHaveLength(7);
+    vi.stubGlobal('scrollY', 480);
+    const restoreScroll = vi.fn();
+    vi.stubGlobal('scrollTo', restoreScroll);
     fireEvent.click(screen.getByRole('radio', { name: 'Consistent Performers' }));
+    expect(restoreScroll).toHaveBeenCalledWith({ left: 0, top: 480, behavior: 'instant' });
     expect(verdict).toHaveTextContent('(40.7)');
     expect(verdict).toHaveTextContent('Consistent Performers');
     fireEvent.click(screen.getByRole('button', { name: 'Remove Ishan Kishan' }));

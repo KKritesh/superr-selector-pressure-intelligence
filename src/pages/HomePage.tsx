@@ -1,3 +1,4 @@
+import { ScoringMethodBar } from '../components/layout/ScoringMethodBar';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowUpRight, UsersRound } from 'lucide-react';
 import { useMethod, playerURL } from '../routes';
@@ -25,6 +26,7 @@ export default function HomePage() {
           </Link>
         </div>
       </section>
+      <ScoringMethodBar />
       <div className="leaderboards">
         <Leaderboard role="batter" />
         <Leaderboard role="bowler" />

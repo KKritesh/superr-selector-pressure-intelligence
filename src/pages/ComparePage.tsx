@@ -1,3 +1,4 @@
+import { ScoringMethodBar } from '../components/layout/ScoringMethodBar';
 import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ArrowLeft, UsersRound, X } from 'lucide-react';
@@ -73,6 +74,7 @@ export default function ComparePage() {
         <h1>Compare Players</h1>
         <p>Look beyond one number. Compare pressure performance alongside the evidence.</p>
       </div>
+      <ScoringMethodBar />
       <ComparisonSelector
         players={players}
         role={role}

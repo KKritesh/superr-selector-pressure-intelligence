@@ -1,11 +1,21 @@
+import { useLayoutEffect, useRef } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import type { Method, Role } from './data/types';
 export function useMethod(): [Method, (m: Method) => void] {
   const [params, setParams] = useSearchParams();
   const method = params.get('m') === 'C' ? 'C' : 'B';
+  const pendingScroll = useRef<{ x: number; y: number } | null>(null);
+  useLayoutEffect(() => {
+    if (!pendingScroll.current) return;
+    const { x, y } = pendingScroll.current;
+    pendingScroll.current = null;
+    window.scrollTo({ left: x, top: y, behavior: 'instant' });
+  }, [params]);
   return [
     method,
     (m) => {
+      if (m === method) return;
+      pendingScroll.current = { x: window.scrollX, y: window.scrollY };
       const next = new URLSearchParams(params);
       next.set('m', m);
       setParams(next, { replace: true });

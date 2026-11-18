@@ -1,3 +1,4 @@
+import { ScoringMethodBar } from '../components/layout/ScoringMethodBar';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, ArrowUpRight, UserRound } from 'lucide-react';
 import { useData } from '../data/DataProvider';
@@ -157,6 +158,7 @@ export default function PlayerPage() {
           })}
         />
       </div>
+      <ScoringMethodBar />
       {rawId && (!identity || !record) ? (
         <section className="card empty-state">
           <UserRound size={32} />

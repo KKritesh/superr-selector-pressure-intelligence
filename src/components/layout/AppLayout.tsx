@@ -3,7 +3,6 @@ import { Link, NavLink, Outlet } from 'react-router-dom';
 import { ChartNoAxesColumnIncreasing, UserRound, UsersRound, CircleHelp } from 'lucide-react';
 import { useData } from '../../data/DataProvider';
 import { useMethod } from '../../routes';
-import { MethodSelector } from '../common/Selectors';
 import { formatDate } from '../../domain/format';
 import { METHOD_NAMES, CONSIDERATION_NOTE } from '../../config/constants';
 import { MethodologyDrawer } from './MethodologyDrawer';
@@ -55,13 +54,6 @@ export function AppLayout() {
             <CircleHelp size={17} />
             <span>How scores work</span>
           </button>
-        </div>
-        <div className="method-bar">
-          <div className="container">
-            <span className="method-caption">Scoring method</span>
-            <MethodSelector />
-            <span className="method-data">Data through {formatDate(meta.dataThrough)}</span>
-          </div>
         </div>
       </header>
       <main className="container main-content" id="main-content" tabIndex={-1}>

@@ -4,7 +4,6 @@ import fs from 'node:fs';
 import { vi } from 'vitest';
 import { DataProvider } from '../../src/data/DataProvider';
 import HomePage from '../../src/pages/HomePage';
-import { MethodSelector } from '../../src/components/common/Selectors';
 const meta = JSON.parse(fs.readFileSync('public/data/meta.json', 'utf8'));
 const players = JSON.parse(fs.readFileSync('public/data/players.json', 'utf8'));
 const consideredIds = new Set(
@@ -35,7 +34,6 @@ describe('rankings with real imported data', () => {
     render(
       <HashRouter>
         <DataProvider>
-          <MethodSelector />
           <HomePage />
         </DataProvider>
       </HashRouter>,
@@ -52,7 +50,11 @@ describe('rankings with real imported data', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Page 2' }));
     fireEvent.click(screen.getByRole('button', { name: 'Page 3' }));
     expect(window.location.hash).toContain('bp=3');
+    vi.stubGlobal('scrollY', 640);
+    const restoreScroll = vi.fn();
+    vi.stubGlobal('scrollTo', restoreScroll);
     fireEvent.click(screen.getByRole('radio', { name: 'Consistent Performers' }));
+    expect(restoreScroll).toHaveBeenCalledWith({ left: 0, top: 640, behavior: 'instant' });
     expect(window.location.hash).toContain('m=C');
     expect(window.location.hash).toContain('bp=3');
     const rank101 = [...consideredBatters].sort((a, b) => a.methods.C.rank - b.methods.C.rank)[100];

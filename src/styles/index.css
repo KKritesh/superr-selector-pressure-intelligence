@@ -79,6 +79,7 @@ small {
   margin-inline: auto;
 }
 .main-content {
+  overflow-anchor: none;
   min-height: calc(100vh - 300px);
   padding-bottom: 32px;
   outline: none;
@@ -249,11 +250,15 @@ summary:focus-visible,
   white-space: nowrap;
 }
 .method-bar {
+  position: sticky;
+  top: 76px;
+  z-index: 20;
+  margin-bottom: 24px;
   background: var(--surface);
   color: var(--ink-700);
   border-bottom: 1px solid var(--line);
 }
-.method-bar > .container {
+.method-bar > .method-bar-inner {
   display: flex;
   align-items: center;
   gap: 16px;
@@ -962,7 +967,11 @@ summary:focus-visible,
   .methodology-trigger span {
     display: none;
   }
-  .method-bar > .container {
+  .method-bar {
+    top: 66px;
+    margin-bottom: 20px;
+  }
+  .method-bar > .method-bar-inner {
     min-height: 66px;
     gap: 0;
   }
