@@ -274,7 +274,8 @@ summary:focus-visible,
 .method-description {
   margin: 0;
   padding-bottom: 12px;
-  font-size: 13px;
+  font-size: 14px;
+  font-style: italic;
   line-height: 1.5;
   color: var(--slate-500);
 }
