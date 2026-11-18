@@ -37,25 +37,31 @@ function Marker({
   seriesIndex: number;
 }): ReactElement {
   if (cx === undefined || cy === undefined) return <g />;
-  const props = { fill: 'var(--surface)', stroke, strokeWidth: 2 };
-  if (seriesIndex === 1) return <rect x={cx - 3.5} y={cy - 3.5} width={7} height={7} {...props} />;
+  const props = { fill: 'var(--surface)', stroke, strokeWidth: 1.3 };
+  if (seriesIndex === 1)
+    return <rect x={cx - 2.275} y={cy - 2.275} width={4.55} height={4.55} {...props} />;
   if (seriesIndex === 2)
-    return <path d={`M${cx} ${cy - 4} L${cx + 4} ${cy + 4} L${cx - 4} ${cy + 4} Z`} {...props} />;
+    return (
+      <path
+        d={`M${cx} ${cy - 2.6} L${cx + 2.6} ${cy + 2.6} L${cx - 2.6} ${cy + 2.6} Z`}
+        {...props}
+      />
+    );
   if (seriesIndex === 3)
     return (
       <path
-        d={`M${cx} ${cy - 5} L${cx + 4} ${cy} L${cx} ${cy + 5} L${cx - 4} ${cy} Z`}
+        d={`M${cx} ${cy - 3.25} L${cx + 2.6} ${cy} L${cx} ${cy + 3.25} L${cx - 2.6} ${cy} Z`}
         {...props}
       />
     );
   if (seriesIndex === 4)
     return (
       <path
-        d={`M${cx - 4} ${cy - 4}L${cx + 4} ${cy + 4} M${cx - 4} ${cy + 4}L${cx + 4} ${cy - 4}`}
+        d={`M${cx - 2.6} ${cy - 2.6}L${cx + 2.6} ${cy + 2.6} M${cx - 2.6} ${cy + 2.6}L${cx + 2.6} ${cy - 2.6}`}
         {...props}
       />
     );
-  return <circle cx={cx} cy={cy} r={4} {...props} />;
+  return <circle cx={cx} cy={cy} r={2.6} {...props} />;
 }
 function TrendTooltip({ active, payload }: TooltipProps<number, string>) {
   if (!active || !payload?.length) return null;
@@ -199,7 +205,7 @@ export function PressureTrendChart({
                     stroke={s.color}
                     strokeWidth={2}
                     dot={<Marker seriesIndex={rows.findIndex((r) => r.id === s.id)} />}
-                    activeDot={{ r: 6 }}
+                    activeDot={{ r: 4.5 }}
                     isAnimationActive={false}
                     connectNulls={false}
                   />
