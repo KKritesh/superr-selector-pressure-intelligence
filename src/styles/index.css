@@ -256,7 +256,9 @@ summary:focus-visible,
   margin-bottom: 24px;
   background: var(--surface);
   color: var(--ink-700);
-  border-bottom: 1px solid var(--line);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding-inline: 16px;
 }
 .method-bar > .method-bar-inner {
   display: flex;
@@ -2449,8 +2451,8 @@ summary:focus-visible,
   padding-block: 12px;
 }
 .leaderboard td {
-  height: 36px;
-  padding-block: 3px;
+  height: 42px;
+  padding-block: 5px;
 }
 .leaderboard td a {
   min-height: 0;
@@ -2470,7 +2472,7 @@ summary:focus-visible,
 }
 @media (max-width: 767px) {
   .leaderboard td {
-    height: 44px;
+    height: 52px;
   }
   .leaderboard .mobile-matches {
     line-height: 14px;
