@@ -2443,3 +2443,36 @@ summary:focus-visible,
     font-size: 12px;
   }
 }
+
+/* Compact leaderboard rows keep the ten-player viewport and paging close together. */
+.leaderboard-heading {
+  padding-block: 12px;
+}
+.leaderboard td {
+  height: 36px;
+  padding-block: 3px;
+}
+.leaderboard td a {
+  min-height: 0;
+  line-height: 16px;
+}
+.leaderboard .nationality {
+  display: inline;
+  margin-left: 6px;
+  font-size: 11px;
+}
+.leaderboard-footer {
+  gap: 4px;
+  padding-block: 4px;
+}
+.leaderboard-footer > span {
+  padding-top: 0;
+}
+@media (max-width: 767px) {
+  .leaderboard td {
+    height: 44px;
+  }
+  .leaderboard .mobile-matches {
+    line-height: 14px;
+  }
+}
