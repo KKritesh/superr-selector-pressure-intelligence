@@ -13,16 +13,20 @@ export function InfoTooltip({
   const id = useId(),
     [open, setOpen] = useState(false);
   const ref = useRef<HTMLButtonElement>(null);
+  const tooltipRef = useRef<HTMLSpanElement>(null);
   const [position, setPosition] = useState({ left: 0, top: 0 });
   useLayoutEffect(() => {
     if (!open || !floating) return;
     const update = () => {
       const rect = ref.current?.getBoundingClientRect();
-      if (rect)
+      if (rect) {
+        const height = tooltipRef.current?.getBoundingClientRect().height ?? 0;
+        const preferredTop = rect.top - height - 8 >= 8 ? rect.top - height - 8 : rect.bottom + 8;
         setPosition({
           left: Math.max(8, Math.min(window.innerWidth - 258, rect.right - 238)),
-          top: rect.top - 8,
+          top: Math.max(8, Math.min(window.innerHeight - height - 8, preferredTop)),
         });
+      }
     };
     update();
     window.addEventListener('scroll', update, true);
@@ -34,6 +38,7 @@ export function InfoTooltip({
   }, [open, floating]);
   const tooltip = (
     <span
+      ref={tooltipRef}
       className="tooltip"
       role="tooltip"
       id={id}
@@ -45,7 +50,9 @@ export function InfoTooltip({
               top: position.top,
               bottom: 'auto',
               right: 'auto',
-              transform: 'translateY(-100%)',
+              maxWidth: 'calc(100vw - 16px)',
+              maxHeight: 'calc(100vh - 16px)',
+              overflowY: 'auto',
               zIndex: 15,
             }
           : undefined

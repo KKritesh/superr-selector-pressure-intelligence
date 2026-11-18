@@ -146,7 +146,7 @@ export function ComparisonGrid({
                 <tr key={metric.label}>
                   <th scope="row">
                     {metric.label}{' '}
-                    <InfoTooltip text={metric.tooltip} label={`About ${metric.label}`} />
+                    <InfoTooltip floating text={metric.tooltip} label={`About ${metric.label}`} />
                     {metric.label === 'Individual Player Score' && <small>Class/Form</small>}
                   </th>
                   {players.map((p, i) => (
@@ -164,7 +164,8 @@ export function ComparisonGrid({
           return (
             <section key={metric.label} className="card comparison-mobile-metric">
               <h2>
-                {metric.label} <InfoTooltip text={metric.tooltip} label={`About ${metric.label}`} />
+                {metric.label}{' '}
+                <InfoTooltip floating text={metric.tooltip} label={`About ${metric.label}`} />
               </h2>
               {players.map((p, i) => (
                 <div key={p.identity.playerId} className="mobile-metric-player">
