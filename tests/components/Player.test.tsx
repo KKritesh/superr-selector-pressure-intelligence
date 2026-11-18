@@ -18,6 +18,7 @@ vi.mock('recharts', async () => {
 });
 function setup(hash: string, sourcePlayers = players) {
   window.location.hash = hash;
+  vi.stubGlobal('scrollTo', vi.fn());
   vi.stubGlobal(
     'fetch',
     vi.fn(async (url: string) => ({
@@ -45,6 +46,7 @@ describe('profile and search interactions', () => {
       </HashRouter>,
     );
     expect(await screen.findByRole('heading', { name: 'Abhishek Sharma' })).toBeInTheDocument();
+    expect(window.scrollTo).toHaveBeenCalledWith({ top: 0, left: 0, behavior: 'instant' });
     expect(screen.getAllByText('41.8')[0]).toBeInTheDocument();
     expect(screen.getByText('134')).toBeInTheDocument();
     fireEvent.click(await screen.findByRole('button', { name: 'View as table' }));

@@ -1,3 +1,4 @@
+import { useLayoutEffect } from 'react';
 import { ScoringMethodBar } from '../components/layout/ScoringMethodBar';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, ArrowUpRight, UserRound } from 'lucide-react';
@@ -136,6 +137,9 @@ export default function PlayerPage() {
     id = Number(rawId),
     identity = rawId ? identities.get(id) : undefined,
     record = identity ? records.get(`${role}:${id}`) : undefined;
+  useLayoutEffect(() => {
+    if (rawId) window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [rawId]);
   const changeRole = (r: Role) => {
     const next = new URLSearchParams(params);
     next.set('role', r);
