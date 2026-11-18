@@ -1,3 +1,4 @@
+import { CountryFlag } from '../common/CountryFlag';
 import { useLayoutEffect, useRef } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { Crosshair, Activity } from 'lucide-react';
@@ -36,7 +37,9 @@ function LeaderboardRow({ player, method }: { player: RankedPlayer; method: Meth
         >
           {displayName(identity)}
         </Link>
-        <span className="nationality">{identity.nationality ?? '—'}</span>
+        <span className="nationality">
+          <CountryFlag country={identity.nationality} />
+        </span>
         <span className="mobile-matches">
           {formatCount(record.matches)} matches
           {record.matches !== null && record.matches < LIMITED_SAMPLE_MATCHES
@@ -119,10 +122,12 @@ export function Leaderboard({ role }: { role: Role }) {
               <th scope="col">Rank</th>
               <th scope="col">Player</th>
               <th scope="col" className="score-cell">
-                Score <InfoTooltip text={TOOLTIPS.master} label="About Master Pressure Score" />
+                Score{' '}
+                <InfoTooltip floating text={TOOLTIPS.master} label="About Master Pressure Score" />
               </th>
               <th scope="col" className="matches-cell">
-                Matches <InfoTooltip text={TOOLTIPS.matches} label="About Matches Analysed" />
+                Matches{' '}
+                <InfoTooltip floating text={TOOLTIPS.matches} label="About Matches Analysed" />
               </th>
             </tr>
           </thead>

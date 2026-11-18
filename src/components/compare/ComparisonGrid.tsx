@@ -1,3 +1,4 @@
+import { CountryFlag } from '../common/CountryFlag';
 import { Link } from 'react-router-dom';
 import type { CSSProperties, ReactNode } from 'react';
 import type { RankedPlayer, Role, Method } from '../../data/types';
@@ -88,7 +89,9 @@ export function ComparisonGrid({
     <>
       <span className="series-dot" style={{ background: `var(--series-${i + 1})` }} />
       <Link to={playerURL(p.identity.playerId, role, method)}>{displayName(p.identity)}</Link>
-      <span className="compare-country">{p.identity.nationality ?? '—'}</span>
+      <span className="compare-country">
+        <CountryFlag country={p.identity.nationality} />
+      </span>
     </>
   );
   const cell = (metric: Metric, i: number, best: Set<number>) => (

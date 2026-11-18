@@ -2515,3 +2515,17 @@ summary:focus-visible,
     gap: 12px;
   }
 }
+
+.country-flag {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  font-size: 20px;
+  line-height: 1;
+  cursor: help;
+}
+.country-flag:focus-visible {
+  outline: 2px solid var(--bat-600);
+  outline-offset: 3px;
+  border-radius: 2px;
+}

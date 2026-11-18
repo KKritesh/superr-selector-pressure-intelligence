@@ -1,3 +1,4 @@
+import { CountryFlag } from '../components/common/CountryFlag';
 import { useLayoutEffect } from 'react';
 import { ScoringMethodBar } from '../components/layout/ScoringMethodBar';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
@@ -54,7 +55,9 @@ function PlayerProfile({
             {displayName(identity)}
           </h1>
           <div className="profile-meta">
-            <span>{identity.nationality ?? '—'}</span>
+            <span>
+              <CountryFlag country={identity.nationality} />
+            </span>
             <span className={`chip ${record.role}`}>{roleLabel(record.role)}</span>
             {dual && <span className="chip dual">Dual-role Player</span>}
             {record.matches !== null && record.matches < LIMITED_SAMPLE_MATCHES && (
@@ -201,7 +204,9 @@ export default function PlayerPage() {
                   <Link to={playerURL(p.playerId, r, method)} key={p.playerId}>
                     <span>
                       <strong>{displayName(p)}</strong>
-                      <small>{p.nationality}</small>
+                      <small>
+                        <CountryFlag country={p.nationality} />
+                      </small>
                     </span>
                     <b>{formatScore(rRecord.methods[method].master)}</b>
                     <ArrowUpRight size={15} />

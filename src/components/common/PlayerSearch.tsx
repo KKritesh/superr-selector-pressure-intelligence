@@ -1,3 +1,4 @@
+import { CountryFlag } from './CountryFlag';
 import { useId, useRef, useState } from 'react';
 import { Search, ArrowUpRight } from 'lucide-react';
 import { useData } from '../../data/DataProvider';
@@ -120,7 +121,9 @@ export function PlayerSearch({
               >
                 <div>
                   <span className="search-name">{displayName(p.identity)}</span>
-                  <small>{p.identity.nationality ?? 'Nationality unavailable'}</small>
+                  <small>
+                    <CountryFlag country={p.identity.nationality} />
+                  </small>
                 </div>
                 <div className="search-roles">
                   {excludeIds.includes(p.identity.playerId) ? (
