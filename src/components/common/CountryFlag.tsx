@@ -3,7 +3,7 @@ const codes: Record<string, string> = {
   Australia: 'AU',
   Bangladesh: 'BD',
   Canada: 'CA',
-  England: 'GB',
+  England: 'GB-ENG',
   'Hong Kong': 'HK',
   India: 'IN',
   Ireland: 'IE',
@@ -15,7 +15,7 @@ const codes: Record<string, string> = {
   'New Zealand': 'NZ',
   Oman: 'OM',
   Pakistan: 'PK',
-  Scotland: 'GB',
+  Scotland: 'GB-SCT',
   Singapore: 'SG',
   'South Africa': 'ZA',
   'Sri Lanka': 'LK',
@@ -26,17 +26,6 @@ const codes: Record<string, string> = {
 export function CountryFlag({ country }: { country: string | null }) {
   const name = country ?? 'Nationality unavailable';
   const code = codes[name];
-  let flag = code
-    ? [...code].map((c) => String.fromCodePoint(127397 + c.charCodeAt(0))).join('')
-    : '🌐';
-  if (name === 'England' || name === 'Scotland') {
-    const tag = name === 'England' ? 'gbeng' : 'gbsct';
-    flag = String.fromCodePoint(
-      0x1f3f4,
-      ...[...tag].map((c) => 0xe0000 + c.charCodeAt(0)),
-      0xe007f,
-    );
-  }
   return (
     <span className="country-flag" role="img" aria-label={name} title={name} tabIndex={0}>
       {name === 'West Indies' ? (
@@ -50,8 +39,10 @@ export function CountryFlag({ country }: { country: string | null }) {
             strokeWidth="2"
           />
         </svg>
+      ) : code ? (
+        <img src={`/flags/${code.toLowerCase()}.svg`} width="22" height="16" alt="" />
       ) : (
-        flag
+        <span aria-hidden="true">—</span>
       )}
     </span>
   );

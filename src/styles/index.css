@@ -2529,3 +2529,18 @@ summary:focus-visible,
   outline-offset: 3px;
   border-radius: 2px;
 }
+.country-flag img {
+  display: block;
+  width: 22px;
+  height: 16px;
+  object-fit: contain;
+}
+@media (min-width: 768px) {
+  .leaderboard th.matches-cell {
+    width: 112px;
+    white-space: nowrap;
+  }
+  .leaderboard th.score-cell {
+    white-space: nowrap;
+  }
+}
