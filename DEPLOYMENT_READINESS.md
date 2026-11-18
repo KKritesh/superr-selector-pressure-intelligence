@@ -21,6 +21,6 @@ The managed Sites preview relay has a previously diagnosed readiness failure. Br
 
 ## Publishing status
 
-No Vercel deployment was requested or performed. GitHub's connected integration rejected creation of the requested private repository with `Resource not accessible by integration (createRepository)`. The repository was not created and no push succeeded. The owner must create an empty private `KKritesh/superr-selector-pressure-intelligence` repository and grant this GitHub connection write access, or authorize a connection with repository-creation permission, before the final push.
+No Vercel deployment was requested or performed. The owner created `KKritesh/superr-selector-pressure-intelligence` after the GitHub integration could not create repositories. Public visibility was explicitly authorized by the owner. The complete prepared project targets the repository's `main` branch at https://github.com/KKritesh/superr-selector-pressure-intelligence. Earlier repository-creation and private-visibility blockers are resolved by the owner's creation and updated visibility instruction.
 
 Vercel settings: Vite; repository root (`.`); install `npm ci`; build `npm run build`; output `dist`; Node 24.x; environment variables: none. See README.md for full instructions and route examples.

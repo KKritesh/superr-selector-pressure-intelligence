@@ -120,6 +120,8 @@ The existing static application is also published as a ChatGPT Site. No backend,
 
 ## Deploy on Vercel from GitHub
 
+GitHub repository: https://github.com/KKritesh/superr-selector-pressure-intelligence (public, `main` branch).
+
 Import the repository at https://vercel.com/new and select:
 
 | Setting | Value |
