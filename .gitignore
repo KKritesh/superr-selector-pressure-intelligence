@@ -4,5 +4,14 @@ dist/
 coverage/
 test-results/
 *.log
-data/source/*.xlsx
 public/.data-*/
+
+# Local credentials and deployment caches
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.vercel/
+.DS_Store
+npm-debug.log*

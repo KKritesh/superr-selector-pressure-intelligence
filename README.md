@@ -1,18 +1,17 @@
 # SupeRR Selector — Pressure Performance Intelligence
 
-A local, read-only dashboard built from the supplied BRD. Rankings, Know Your Player and Compare Players use the real precomputed Excel outputs. Batting and bowling remain separate throughout.
+A static, read-only React + TypeScript dashboard built from the supplied BRD. Rankings, Know Your Player and Compare Players use the real precomputed Excel outputs. Batting and bowling remain separate throughout.
 
 ## Start locally
 
-Prerequisites: Node.js 20 or newer and npm. This project was built with Node 24.22.1 and npm 11.9.0. Extract the complete folder before running:
+Prerequisites: Node.js 20 or newer and npm. This project was built with Node 24.22.1 and npm 11.9.0. From the repository root, run:
 
 ```sh
-npm install
-npm run data:build
+npm ci
 npm run dev
 ```
 
-Open the address Vite prints (normally http://localhost:4173). The first data build can take about half a minute because the match-wise workbook has many columns. Source workbooks and generated data are included in the delivery. After dependencies are installed, the app and data build run locally without third-party runtime requests. Fonts are bundled.
+Open the address Vite prints (normally http://localhost:4173). The committed `public/data/` files are ready to use: do not run `data:build` for installation or deployment. Original workbook inputs are included in `data/source/` for optional verification and refresh. After dependencies are installed, the app and data build run locally without third-party runtime requests. Fonts are bundled.
 
 ```sh
 npm test                 # domain, source-fidelity, refresh and component tests
@@ -27,7 +26,7 @@ Use a local server; opening `dist/index.html` directly with `file://` will not l
 
 - Independent batting and bowling lists with numbered pagination, 50 players per page, and a scroll area sized to the first 10 players.
 - Global Recent Performers / Consistent Performers selection, carried in the URL using the unchanged B/C method codes.
-- Accessible name/ID search, duplicate-name disambiguation, role chips, arrow-key navigation and keyboard role selection.
+- Accessible player search with role/nationality/match-range filters, empty-query browsing, role chips, arrow-key navigation and keyboard role selection. Player labels show names only; IDs remain distinct internally.
 - Profiles with Master Pressure Score, consideration-pool rank/percentile, matches, Realtime Performance, Individual Player Score, recent/all-match trends, form indicator, dual-role views and source-row details.
 - Comparison of 2–5 eligible players, removable selections, role-change notices, six metric rows, displayed-precision leader badges, separate sample-size tags, multi-series trends and deterministic verdicts.
 - Methodology drawer, tooltips, loading/retry/empty states, mobile navigation and responsive styles.
@@ -43,7 +42,7 @@ All dashboard views use these revised rankings and pool sizes, including search 
 
 Original Excel workbooks, generated reference JSON, master scores, supporting metrics, penalties, weights and scoring benchmarks remain intact. Original ranking values are kept on derived records as `sourceMethods`, and the original selected-method rank appears in More Details. Original metadata is retained as `sourceMeta`. `verify:sample` checks imported reference data against Excel; the revised consideration-pool ranks/percentiles are independently checked for every remaining record in the ranking tests.
 
-The dashboard is privately hosted at https://superr-selector-pressure-intelligence.mysticwarbler2.chatgpt.site for the owner's account.
+Existing hosted dashboard: https://superr-selector-pressure-intelligence.mysticwarbler2.chatgpt.site.
 
 ## Data and refresh
 
@@ -102,7 +101,7 @@ URL forms: `#/`, `#/player?role=batter&id=6281&m=B`, `#/compare?role=bowler&ids=
 9. **Active flag.** Observed values are `Yes` and `No`; `Yes` displays “Active in last 2 years”. Its precise upstream semantics were not independently established.
 10. **Role vocabulary.** Actual source roles are only `Batter` and `Bowler`. Other values fail the build.
 11. **Form with 8–9 matches.** Following the BRD's ≥8 minimum, compare the latest five against the available 3–4 earlier observations in the preceding five-slot window. Fewer than eight gets the specified insufficient-history label.
-12. **Identity collisions.** Every colliding name is qualified with nationality and player ID. The ID already resolves the same-country Basil Hameed collision, so no additional date suffix is needed.
+12. **Identity collisions.** Player names display without appended country or ID details. Underlying IDs keep same-name players distinct. Lokesh Rahul is displayed as KL Rahul through a presentation override; reference JSON remains unchanged.
 13. **Browser verification.** The initial managed preview relay failed to open port 4173. A subsequent user-requested startup diagnosis verified a healthy direct Vite server on `0.0.0.0:4173` and live rendering of Rankings, Know Your Player, Compare Players and B/C switching in the shared browser. The managed Sites relay still fails independently. See `PREVIEW_DIAGNOSIS.md`. Full responsive screenshots, touch-target review, browser color-contrast/axe checks, load timings, cross-browser coverage and the unaided two-minute usability test remain unverified. No application, scoring, dataset or UI files changed during that repair.
 
 ## Optional local browser acceptance
@@ -117,10 +116,30 @@ npm run test:browser
 
 It serves the production bundle locally, checks the main selection path, independent pagination/Back, page overflow at the four requested widths, JavaScript errors and real-browser axe violations. Safari/Firefox/Edge and the unaided executive usability test still need manual review.
 
-The existing static application is published as an owner-only ChatGPT Site. No backend, scoring framework changes, auction valuation or combined all-rounder score are included.
+The existing static application is also published as a ChatGPT Site. No backend, scoring framework changes, auction valuation or combined all-rounder score are included.
 
-## Handoff files
+## Deploy on Vercel from GitHub
 
-`TEST_REPORT.md` records the completed checks and remaining acceptance work. `reports/` contains the source-verification output and machine-readable test results. The full source, workbook inputs, generated JSON, production `dist/` and six phase commits are retained in the workspace.
+Import the repository at https://vercel.com/new and select:
 
-The designated projectless download folder could not be created on this cloud machine (read-only filesystem / permission denied). The ZIP is therefore staged in `/workspace/work/` for export rather than linked to a nonexistent download path.
+| Setting | Value |
+| --- | --- |
+| Framework Preset | Vite |
+| Root Directory | Repository root (`.`) |
+| Install Command | `npm ci` |
+| Build Command | `npm run build` |
+| Output Directory | `dist` |
+| Node.js | 24.x (verified locally with 24.22.1) |
+| Environment Variables | None |
+
+Do not add a `data:build` deployment step. Vite copies the committed `public/data/` JSON and `public/flags/` SVGs into `dist/`; npm bundles the fonts and frontend assets. The original Excel files are not copied into the public website. `src/data/loader.ts` reads data relative to Vite's base URL. The existing `base: './'` works at a domain root and is retained.
+
+Routing uses `HashRouter`: share links such as `https://your-domain/#/player?role=batter&id=953&m=B` and `https://your-domain/#/compare?role=bowler&ids=6281,4117&m=C`. The fragment is handled by React after the server serves `/`, so direct links and refreshes require no Vercel rewrite and no `vercel.json`. Retain the `#/` portion in shared links.
+
+The runtime has no backend, API key, absolute workspace path, or Codex dependency. Light/dark preference is stored locally in the visitor's browser. No deployment to Vercel is performed by this repository preparation.
+
+## Verification and source inputs
+
+`npm test` covers source fidelity, filtering, rankings, search, theme persistence, chart rendering, profiles and comparison interactions. `npm run verify:sample` additionally checks the workbook inputs against the committed reference data. `reports/` contains historical verification reports; `TEST_REPORT.md` and `PREVIEW_DIAGNOSIS.md` retain the original handoff history. The optional Playwright acceptance suite above is for visual/browser checks, whose environment limitations remain documented.
+
+`node_modules/`, `dist/`, test output, local credentials, `.env*` files and Vercel caches are ignored. `.openai/hosting.json` preserves the existing Sites project identity; it contains no credential and is not used by Vercel. No environment file is needed.
