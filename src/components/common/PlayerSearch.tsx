@@ -61,7 +61,7 @@ export function PlayerSearch({
         aria-autocomplete="list"
         aria-describedby={`${id}-help`}
         aria-activedescendant={visible && active >= 0 ? `${id}-${active}` : undefined}
-        placeholder={disabled ? 'Maximum 5 players' : 'Search player by name or ID…'}
+        placeholder={disabled ? 'Maximum 5 players' : 'Search player by name'}
         disabled={disabled}
         value={query}
         onChange={(e) => {
